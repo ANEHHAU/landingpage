@@ -34,5 +34,5 @@ RUN chmod +x ./gradlew
 RUN ./gradlew clean build -x test
 
 # Chạy file jar đã build
-# Chạy file JAR (Render sẽ tự tìm đúng tên)
-CMD ["sh", "-c", "java -jar $(find build/libs -name '*.jar' | head -n 1)"]
+# Chạy đúng file JAR có chứa Spring Boot main class
+CMD ["sh", "-c", "java -jar $(find build/libs -type f -name '*SNAPSHOT.jar' ! -name '*plain.jar' | head -n 1)"]
