@@ -2,19 +2,641 @@
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Đặt hàng - Việt Đức</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Camera DA-8.1 - DOSCOM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 90px;
+            font-size: 14px;
+        }
+
+        /* === THÔNG BÁO MUA HÀNG === */
+        .notification {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            z-index: 999;
+            max-width: 90%;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            font-size: 13px;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .notification img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+
+        .noti-text strong {
+            color: #d32f2f;
+        }
+
+        .noti-time {
+            color: #888;
+            font-size: 11px;
+        }
+
+        /* === SLIDER === */
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            margin: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .dots {
+            text-align: center;
+            padding: 8px;
+            background: rgba(0,0,0,0.05);
+        }
+
+        .dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background: #bbb;
+            border-radius: 50%;
+            margin: 0 4px;
+        }
+
+        .dot.active {
+            background: #d32f2f;
+        }
+
+        /* === ĐÁNH GIÁ TRUNG BÌNH === */
+        .rating-summary {
+            background: white;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .avg-rating {
+            font-size: 32px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .stars {
+            color: #ffb400;
+            font-size: 20px;
+            margin: 5px 0;
+        }
+
+        .review-count {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #eee;
+            border-radius: 3px;
+            margin: 5px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: #4caf50;
+            border-radius: 3px;
+        }
+
+        /* === ƯU ĐÃI HÔM NAY === */
+        .offer-banner {
+            background: linear-gradient(135deg, #d32f2f, #f44336);
+            color: white;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .price del {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .price strong {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .countdown {
+            margin: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .countdown span {
+            background: rgba(255,255,255,0.3);
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin: 0 2px;
+            min-width: 36px;
+            display: inline-block;
+        }
+
+        .countdown-label {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        /* === FORM ĐẶT HÀNG === */
+        .order-form {
+            background: white;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 2px solid #d32f2f;
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 20px;
+            color: #d32f2f;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .form-note {
+            font-size: 13px;
+            color: #d32f2f;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .btn-order {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .form-footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* === ĐÁNH GIÁ KHÁCH HÀNG === */
+        .reviews {
+            margin: 15px;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .review {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            display: flex;
+        }
+
+        .review:last-child {
+            border-bottom: none;
+        }
+
+        .review-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .review-content {
+            flex: 1;
+        }
+
+        .review-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .review-time {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .review-text {
+            margin: 5px 0;
+            font-size: 13px;
+        }
+
+        .review-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-top: 8px;
+        }
+
+        .verified {
+            color: #4caf50;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            background: #1a1a1a;
+            color: #ccc;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        .footer h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .footer a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        .policy {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .policy-item {
+            text-align: center;
+            margin: 10px;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .policy-item i {
+            font-size: 24px;
+            color: #4caf50;
+            margin-bottom: 5px;
+        }
+
+        /* === NÚT MUA NGAY + HOTLINE === */
+        .fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1a1a1a;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hotline {
+            color: white;
+            font-size: 14px;
+        }
+
+        .hotline strong {
+            color: #4caf50;
+            font-size: 16px;
+        }
+
+        .btn-buy {
+            background: #ffeb3b;
+            color: #d32f2f;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            min-width: 120px;
+        }
+
+        .call-btn {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        /* === LOADING OVERLAY === */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            flex-direction: column;
+            color: white;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #fff;
+            border-top: 5px solid #d32f2f;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h2>Thông tin đặt hàng</h2>
-    <form th:action="@{/vietduc/submit}" method="post">
-        <input type="text" name="name" placeholder="Họ và tên" required>
-        <input type="tel" name="phone" placeholder="Số điện thoại" required>
-        <input type="text" name="address" placeholder="Địa chỉ nhận hàng" required>
-        <button type="submit">Gửi đơn</button>
+
+<!-- THÔNG BÁO MUA HÀNG -->
+<div class="notification" id="notification">
+    <img th:src="@{/images/avatar1.jpg}" alt="KH">
+    <div>
+        <div class="noti-text" id="noti-text"></div>
+        <div class="noti-time" id="noti-time"></div>
+    </div>
+</div>
+
+<!-- SLIDER ẢNH -->
+<div class="slider-container">
+    <div class="slider" id="slider">
+        <div class="slide"><img th:src="@{/images/da81-1.jpg}" alt="Camera DA-8.1"></div>
+        <div class="slide"><img th:src="@{/images/da81-2.jpg}" alt="Camera DA-8.1"></div>
+        <div class="slide"><img th:src="@{/images/da81-3.jpg}" alt="Camera DA-8.1"></div>
+    </div>
+    <div class="dots" id="dots"></div>
+</div>
+
+<!-- ĐÁNH GIÁ TRUNG BÌNH -->
+<div class="rating-summary">
+    <div class="avg-rating">5/5</div>
+    <div class="stars">★★★★★</div>
+    <div class="review-count">1.545 nhận xét</div>
+    <div style="margin: 10px 0; text-align: left;">
+        <div style="display: flex; align-items: center; margin: 4px 0;">
+            <span style="width: 30px;">5★</span>
+            <div class="progress-bar" style="flex:1; margin:0 8px;"><div class="progress" style="width:100%;"></div></div>
+            <span>100%</span>
+        </div>
+        <div style="display: flex; align-items: center; margin: 4px 0;">
+            <span style="width: 30px;">4★</span>
+            <div class="progress-bar" style="flex:1; margin:0 8px;"><div class="progress" style="width:0%;"></div></div>
+            <span>0%</span>
+        </div>
+    </div>
+</div>
+
+<!-- ƯU ĐÃI HÔM NAY -->
+<div class="offer-banner">
+    <div class="offer-title">CHỈ DUY NHẤT HÔM NAY</div>
+    <img th:src="@{/images/da81-promo.jpg}" style="width:100%; border-radius:8px; margin:10px 0;">
+    <div class="price">
+        <del>1.336.000đ</del> → <strong>900.000đ</strong>
+    </div>
+    <div class="countdown" id="countdown">
+        <span>01</span><span>28</span><span>31</span>
+    </div>
+    <div class="countdown-label">Giờ  Phút  Giây</div>
+</div>
+
+<!-- FORM ĐẶT HÀNG -->
+<div class="order-form" id="orderForm">
+    <div class="form-title">ĐĂNG KÝ ĐẶT HÀNG</div>
+    <div class="form-note">* Vui lòng điền đầy đủ thông tin dưới đây</div>
+    <form id="submitForm" th:action="@{/doscom/submit}" method="post">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="Họ và tên" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" name="phone" placeholder="Số điện thoại" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="address" placeholder="Địa chỉ" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="note" placeholder="Để lại lời nhắn cho chúng tôi">
+        </div>
+        <button type="submit" class="btn-order">ĐẶT HÀNG NGAY</button>
+        <div class="form-footer">
+            Chúng tôi sẽ liên hệ lại để xác nhận đơn hàng trong 24h. Quý khách vui lòng giữ máy!
+        </div>
     </form>
 </div>
+
+<!-- ĐÁNH GIÁ KHÁCH HÀNG -->
+<div class="reviews">
+    <div class="review">
+        <img th:src="@{/images/kh1.jpg}" class="review-img">
+        <div class="review-content">
+            <div class="review-name">Trần Đức</div>
+            <div class="review-time">Hôm nay</div>
+            <div class="stars">★★★★★</div>
+            <div class="review-text">Sản phẩm rất tốt, mình mua để test sau nhập về bán luôn, nói chung giá ổn nhỏ gọn rất tiện cho công việc...</div>
+            <div class="verified">Chứng nhận đã mua hàng</div>
+            <img th:src="@{/images/review1.jpg}" class="review-photo">
+        </div>
+    </div>
+    <div class="review">
+        <img th:src="@{/images/kh2.jpg}" class="review-img">
+        <div class="review-content">
+            <div class="review-name">Huy Hùng</div>
+            <div class="review-time">Hôm nay</div>
+            <div class="stars">★★★★★</div>
+            <div class="review-text">Rất thích camera mini chống nhiệt này, à shop tư vấn cũng nhiệt tình. Dùng để đi chơi...</div>
+            <div class="verified">Chứng nhận đã mua hàng</div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <h3>CÔNG TY TNHH ĐẦU TƯ VÀ PHÁT TRIỂN CÔNG NGHỆ INNOTECH</h3>
+    <p>Địa chỉ: 38b, Triều Việt Vương, Nguyễn Du, HBT, Hà Nội</p>
+    <p>Hotline: <a href="tel:1900638597">1900638597</a></p>
+    <p>Website: <a href="https://www.doscomvietnam.store/dad8.1" target="_blank">www.doscomvietnam.store/dad8.1</a></p>
+    <div class="policy">
+        <div class="policy-item">
+            <i class="fas fa-truck"></i>
+            <div>Chính sách vận chuyển</div>
+        </div>
+        <div class="policy-item">
+            <i class="fas fa-shield-alt"></i>
+            <div>Chính sách bảo hành</div>
+        </div>
+        <div class="policy-item">
+            <i class="fas fa-credit-card"></i>
+            <div>Chính sách thanh toán</div>
+        </div>
+        <div class="policy-item">
+            <i class="fas fa-lock"></i>
+            <div>Chính sách bảo mật</div>
+        </div>
+    </div>
+    <p style="margin-top: 15px; font-size: 11px;">©2018 Đã đăng ký bản quyền</p>
+</footer>
+
+<!-- NÚT MUA NGAY + GỌI NGAY -->
+<div class="fixed-bottom">
+    <div class="hotline">
+        HOTLINE: <strong>1900638597</strong><br>
+        <small>(Sản phẩm chính hãng Doscom)</small>
+    </div>
+    <div>
+        <button class="btn-buy" onclick="scrollToForm()">MUA NGAY</button>
+        <a href="tel:+84369936031" class="call-btn">Phone</a>
+    </div>
+</div>
+
+<!-- LOADING -->
+<div class="overlay" id="overlay">
+    <div class="spinner"></div>
+    <div>Đang gửi thông tin...</div>
+</div>
+
+<script>
+    // === SLIDER ===
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('dots');
+    slides.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+    });
+
+    function goToSlide(n) {
+        slideIndex = n;
+        document.getElementById('slider').style.transform = `translateX(-${slideIndex * 100}%)`;
+        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === slideIndex));
+    }
+
+    setInterval(() => goToSlide((slideIndex + 1) % slides.length), 4000);
+
+    // === THÔNG BÁO MUA HÀNG ===
+    const names = ['Nguyễn Văn Hiệp', 'Trần Tất Cường', 'An Bảo Long', 'Lê Văn Công', 'Hoàng Yến'];
+    const qty = [1, 2, 3, 4];
+    const times = ['3 phút', '4 phút', '5 phút', '8 phút', '10 phút'];
+
+    function showNoti() {
+        const name = names[Math.floor(Math.random() * names.length)];
+        const q = qty[Math.floor(Math.random() * qty.length)];
+        const t = times[Math.floor(Math.random() * times.length)];
+        document.getElementById('noti-text').innerHTML = `<strong>${name}</strong> đã mua <strong>${q} sản phẩm</strong>`;
+        document.getElementById('noti-time').textContent = `${t} trước`;
+        const noti = document.getElementById('notification');
+        noti.classList.add('show');
+        setTimeout(() => noti.classList.remove('show'), 2800);
+    }
+
+    setInterval(showNoti, 3000);
+    setTimeout(showNoti, 1200);
+
+    // === ĐỒNG HỒ ĐẾM NGƯỢC ===
+    let countdown = 1 * 3600 + 28 * 60 + 31; // 1h28p31s
+    const cdEl = document.getElementById('countdown');
+    setInterval(() => {
+        if (countdown <= 0) return;
+        const h = String(Math.floor(countdown / 3600)).padStart(2, '0');
+        const m = String(Math.floor((countdown % 3600) / 60)).padStart(2, '0');
+        const s = String(countdown % 60).padStart(2, '0');
+        cdEl.innerHTML = `<span>${h}</span><span>${m}</span><span>${s}</span>`;
+        countdown--;
+    }, 1000);
+
+    // === CUỘN VỀ FORM ===
+    function scrollToForm() {
+        document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // === LOADING KHI GỬI ===
+    document.getElementById('submitForm').addEventListener('submit', function(e) {
+        document.getElementById('overlay').style.display = 'flex';
+        // setTimeout(() => this.submit(), 1500); // Nếu dùng AJAX
+    });
+</script>
 </body>
 </html>

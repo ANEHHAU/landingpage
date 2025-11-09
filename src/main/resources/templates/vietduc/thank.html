@@ -1,2 +1,57 @@
-<h2>Cảm ơn bạn đã đặt hàng!</h2>
-<p>Chúng tôi sẽ liên hệ trong thời gian sớm nhất.</p>
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cảm ơn đã đặt hàng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .thankyou-box {
+            text-align: center;
+            background: #fff;
+            padding: 30px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+        h2 {
+            color: #0c9;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #555;
+            font-size: 16px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background: #0c9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        a:hover {
+            background: #00bfa5;
+        }
+    </style>
+</head>
+<body>
+<div class="thankyou-box">
+    <h2>Cảm ơn bạn đã đặt hàng!</h2>
+    <p>Chúng tôi sẽ liên hệ trong thời gian sớm nhất.</p>
+    <a th:href="@{/}">Quay lại trang chủ</a>
+</div>
+</body>
+</html>
