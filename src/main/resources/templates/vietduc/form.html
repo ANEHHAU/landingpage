@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đặt hàng - Việt Đức</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="container">
+    <h2>Thông tin đặt hàng</h2>
+    <form th:action="@{/vietduc/submit}" method="post">
+        <input type="text" name="name" placeholder="Họ và tên" required>
+        <input type="tel" name="phone" placeholder="Số điện thoại" required>
+        <input type="text" name="address" placeholder="Địa chỉ nhận hàng" required>
+        <button type="submit">Gửi đơn</button>
+    </form>
+</div>
+</body>
+</html>
