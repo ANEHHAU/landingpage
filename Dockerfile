@@ -34,4 +34,5 @@ RUN chmod +x ./gradlew
 RUN ./gradlew clean build -x test
 
 # Chạy file jar đã build
-CMD ["java", "-jar", "build/libs/landingpage-0.0.1-SNAPSHOT.jar"]
+# Chạy file JAR (Render sẽ tự tìm đúng tên)
+CMD ["sh", "-c", "java -jar $(find build/libs -name '*.jar' | head -n 1)"]
