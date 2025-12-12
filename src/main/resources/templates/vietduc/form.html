@@ -65,36 +65,22 @@
         }
 
 
-        /* ===== TITLE ===== */
-        /*.product-title-center {*/
-        /*    margin-top: 80px;*/
-        /*    text-align: center;*/
-        /*    font-size: 40px; !* tăng từ 28px lên 34px *!*/
-        /*    font-weight: 750; !* đậm hơn (700 → 800) *!*/
-        /*    font-style: italic; !* thêm nghiêng *!*/
-        /*    color: #333;*/
-        /*    padding: 10px 20px;*/
-        /*    line-height: 1.3;*/
-        /*}*/
-
         .product-title {
             font-size: 22px;
             font-weight: 700;
 
-            color: #ff7a45;            /* cam nhạt, nhìn mềm */
-            font-style: italic;        /* cong nhẹ cho chữ */
+            color: #ff7a45; /* cam nhạt, nhìn mềm */
+            font-style: italic; /* cong nhẹ cho chữ */
 
-            text-align: center;        /* căn giữa chuẩn, không lệch */
+            text-align: center; /* căn giữa chuẩn, không lệch */
             line-height: 1.45;
 
-            max-width: 450px;          /* khống chế chiều rộng để tự xuống dòng đẹp */
-            margin: 0 auto;            /* căn giữa cả khối */
+            max-width: 450px; /* khống chế chiều rộng để tự xuống dòng đẹp */
+            margin: 0 auto; /* căn giữa cả khối */
 
-            padding: 0 20px;           /* cách lề trái phải */
+            padding: 0 20px; /* cách lề trái phải */
             display: block;
         }
-
-
 
 
         body {
@@ -172,9 +158,9 @@
         .product-title {
             font-size: 22px;
             font-weight: 700;
-            text-align: justify;        /* căn đều hai bên cho các dòng */
-            text-align-last: center;    /* dòng cuối căn giữa đúng ý bạn */
-            line-height: 1.4;           /* đẹp mắt khi xuống dòng */
+            text-align: justify; /* căn đều hai bên cho các dòng */
+            text-align-last: center; /* dòng cuối căn giữa đúng ý bạn */
+            line-height: 1.4; /* đẹp mắt khi xuống dòng */
             width: 100%;
             display: block;
         }
@@ -538,6 +524,13 @@
             color: #333;
         }
 
+        .labelFirst {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            font-style: italic;
+        }
+
         .old-price2 {
             text-decoration: line-through;
             font-style: italic;
@@ -581,6 +574,17 @@
         }
 
 
+        .product-title-center {
+            margin-top: 80px;
+            text-align: center;
+            font-size: 40px; /* tăng từ 28px lên 34px */
+            font-weight: 750; /* đậm hơn (700 → 800) */
+            font-style: italic; /* thêm nghiêng */
+            color: #333; padding: 10px 20px;
+            line-height: 1.3;
+        }
+
+
     </style>
 </head>
 
@@ -616,7 +620,7 @@
 
 <div id="priceBox" class="price-box">
     <div class="price-left">
-        <div class="label">Giá Chỉ:</div>
+        <div class="labelFirst">Giá Chỉ:</div>
         <div id="oldPrice" class="old-price"></div>
     </div>
 
@@ -641,24 +645,10 @@
     <div id="thumbnailList" class="thumbnail-container"></div>
 
 
-
-<!--    @todo-->
     <div class="block">
         <span class="product-title" id="productDetail"></span>
 
     </div>
-    <!--        <div class="price-area">-->
-    <!--            <span id="price" class="price"></span>-->
-    <!--            <span id="originalPrice" class="original-price"></span>-->
-    <!--            <span id="discountPercent" class="discount"></span>-->
-    <!--            <span id="soldCount" class="sold"></span>-->
-    <!--        </div>-->
-
-
-
-
-
-
 
 
     <!-- BLOCK THÔNG TIN THEO ẢNH -->
@@ -804,7 +794,6 @@
     // ===== FLASH SALE PRICE =====
     document.getElementById("flashPrice").textContent =
         "#" + Math.round(muc_1.price / 1000) + "K";
-
 
 
     document.getElementById("productDetail").textContent = muc_1.detail;
