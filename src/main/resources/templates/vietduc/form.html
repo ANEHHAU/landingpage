@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Trang sản phẩm</title>
+    <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
@@ -22,14 +21,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
 
         .flash {
             text-align: center;
             font-weight: 900;
-            font-size: 22px;            /* chữ to giống ảnh */
+            font-size: 22px; /* chữ to giống ảnh */
             letter-spacing: 1px;
         }
 
@@ -39,11 +38,10 @@
         }
 
         .price-highlight {
-            color: #ff6a00;             /* màu cam như ảnh */
+            color: #ff6a00; /* màu cam như ảnh */
             font-weight: 900;
             font-size: 26px;
         }
-
 
 
         .btn-buy {
@@ -68,32 +66,52 @@
 
 
         /* ===== TITLE ===== */
-        .product-title-center {
-            margin-top: 80px;
-            text-align: center;
-            font-size: 34px;       /* tăng từ 28px lên 34px */
-            font-weight: 750;      /* đậm hơn (700 → 800) */
-            font-style: italic;    /* thêm nghiêng */
-            color: #333;
-            padding: 10px 20px;
-            line-height: 1.3;
+        /*.product-title-center {*/
+        /*    margin-top: 80px;*/
+        /*    text-align: center;*/
+        /*    font-size: 40px; !* tăng từ 28px lên 34px *!*/
+        /*    font-weight: 750; !* đậm hơn (700 → 800) *!*/
+        /*    font-style: italic; !* thêm nghiêng *!*/
+        /*    color: #333;*/
+        /*    padding: 10px 20px;*/
+        /*    line-height: 1.3;*/
+        /*}*/
+
+        .product-title {
+            font-size: 22px;
+            font-weight: 700;
+
+            color: #ff7a45;            /* cam nhạt, nhìn mềm */
+            font-style: italic;        /* cong nhẹ cho chữ */
+
+            text-align: center;        /* căn giữa chuẩn, không lệch */
+            line-height: 1.45;
+
+            max-width: 450px;          /* khống chế chiều rộng để tự xuống dòng đẹp */
+            margin: 0 auto;            /* căn giữa cả khối */
+
+            padding: 0 20px;           /* cách lề trái phải */
+            display: block;
         }
+
+
+
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin:0;
-            background:#f5f5f5;
-            padding-top: 20px;   /* THÊM DÒNG NÀY */
+            margin: 0;
+            background: #f5f5f5;
+            padding-top: 20px; /* THÊM DÒNG NÀY */
 
         }
 
         .container {
             max-width: 600px;
             margin: 5px auto 20px;
-            background:#fff;
-            border-radius:8px;
-            overflow:hidden;
-            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         /* ẢNH CHÍNH */
@@ -102,7 +120,6 @@
             height: 280px;
             object-fit: cover;
         }
-
 
 
         /* ẢNH CHÍNH */
@@ -114,16 +131,15 @@
 
         .slide-wrap img {
             width: calc(100% - 24px); /* tạo khoảng cách 12px mỗi bên */
-            margin: 0 12px;           /* cách hai bên ảnh */
+            margin: 0 12px; /* cách hai bên ảnh */
             aspect-ratio: 4 / 5;
             max-height: 420px;
 
-            object-fit: contain;   /* ảnh full – không cắt */
-            background: #fff;      /* giữ nền trắng tránh lộ màu */
+            object-fit: contain; /* ảnh full – không cắt */
+            background: #fff; /* giữ nền trắng tránh lộ màu */
             border-radius: 12px;
             flex-shrink: 0;
         }
-
 
 
         /* ALBUM */
@@ -134,6 +150,7 @@
             overflow-x: auto;
             scroll-behavior: smooth;
         }
+
         .thumbnail {
             width: 80px;
             height: 80px;
@@ -142,6 +159,7 @@
             border: 2px solid transparent;
             cursor: pointer;
         }
+
         .thumbnail.active {
             border-color: #ee4d2d;
         }
@@ -151,12 +169,47 @@
             border-bottom: 10px solid #f5f5f5;
         }
 
-        .product-title { font-size: 22px; font-weight: 700; }
-        .price-area { display:flex; align-items:center; gap:8px; }
-        .price { font-size:30px; color:#ee4d2d; font-weight:bold; }
-        .original-price { text-decoration:line-through; color:#888; }
-        .discount { background:#ffe5e0; color:#ee4d2d; padding:2px 5px; border-radius:4px; font-size:12px; }
-        .sold { margin-left:auto; color:#444; font-size:14px; }
+        .product-title {
+            font-size: 22px;
+            font-weight: 700;
+            text-align: justify;        /* căn đều hai bên cho các dòng */
+            text-align-last: center;    /* dòng cuối căn giữa đúng ý bạn */
+            line-height: 1.4;           /* đẹp mắt khi xuống dòng */
+            width: 100%;
+            display: block;
+        }
+
+
+        .price-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price {
+            font-size: 30px;
+            color: #ee4d2d;
+            font-weight: bold;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .discount {
+            background: #ffe5e0;
+            color: #ee4d2d;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .sold {
+            margin-left: auto;
+            color: #444;
+            font-size: 14px;
+        }
 
         /* ===== OPTION CHỌN SẢN PHẨM ===== */
         .option-group-title {
@@ -208,7 +261,9 @@
             margin-bottom: 15px;
         }
 
-        .form-group { margin-bottom: 12px; }
+        .form-group {
+            margin-bottom: 12px;
+        }
 
         .order-form input {
             width: 100%;
@@ -229,7 +284,6 @@
             border-radius: 6px;
             cursor: pointer;
         }
-
 
 
         .slider {
@@ -259,15 +313,271 @@
         }
 
         .left-btn {
-            left: 0;    /* nằm sát mép ảnh */
+            left: 0; /* nằm sát mép ảnh */
         }
 
         .right-btn {
-            right: 0;   /* nằm sát mép ảnh */
+            right: 0; /* nằm sát mép ảnh */
         }
 
         .slide-btn:active {
             transform: translateY(-50%) scale(0.9);
+        }
+
+
+        /*    giá dưới tên sp*/
+        /*    */
+        .price-box {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 10px auto;
+            border: 1px solid #000;
+            padding: 12px 18px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.6); /* nền mờ bớt */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            backdrop-filter: blur(2px); /* cho sang nét */
+        }
+
+        /* Bên trái */
+        .price-left {
+            text-align: left;
+        }
+
+        .label {
+            font-size: 24px;
+            font-weight: 700;
+            font-style: italic;
+            color: #d32f2f;
+        }
+
+        /* Giá gốc */
+        .old-price {
+            font-size: 26px; /* TO HƠN */
+            font-weight: 700;
+            font-style: italic; /* NGHIÊNG */
+            color: #d32f2f;
+            text-decoration: line-through;
+        }
+
+        /* Bên phải */
+        .price-right {
+            text-align: right;
+        }
+
+        /* Giá sale */
+        .sale-price {
+            font-size: 30px; /* TO HƠN NHIỀU */
+            font-weight: 800;
+            font-style: italic;
+        }
+
+        /* Ship */
+        .ship {
+            font-size: 18px;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+
+        /* ==== BLOCK THÔNG TIN GIỐNG ẢNH ==== */
+        .info-box {
+            background: #fff;
+            padding: 10px 5px;
+            margin-top: 10px;
+        }
+
+        /* dòng 1 */
+        .line1 {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .left, .right {
+            width: 25%; /* 2 cột hai bên bằng nhau */
+            display: flex;
+            align-items: center;
+        }
+
+        .center {
+            width: 50%; /* cột giữa */
+            display: flex;
+            justify-content: center; /* căn giữa tuyệt đối */
+        }
+
+        /* Yêu thích */
+        .badge-like {
+            background: #ff6b4a;
+            color: #fff;
+            padding: 7px 16px; /* to hơn một chút */
+            border-radius: 5px;
+            font-size: 16px; /* tăng size */
+            font-weight: 700;
+            margin-left: 20px;
+        }
+
+
+        /* Bảo hành */
+        .warranty-text {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+
+        /* dòng 2 */
+        .line2 {
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 22px; /* TO HƠN NHIỀU */
+        }
+
+        .col-rate, .col-vote, .col-sold {
+            width: 33%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Số điểm 4.8 – TO */
+        .rating-score {
+            color: #d4281c;
+            font-size: 28px; /* TO RÕ */
+            font-weight: 600;
+        }
+
+        /* SAO – PHẢI TO HƠN SỐ */
+        .rating-stars {
+            color: #ff1d1d;
+            font-size: 34px; /* TO HƠN 4.8 */
+            line-height: 1;
+        }
+
+        /* Lượt đánh giá */
+        .rating-count {
+            font-size: 24px; /* to rõ */
+            font-weight: 500;
+        }
+
+        /* đã bán */
+        .sold-count {
+            font-size: 24px; /* to rõ */
+            font-weight: 500;
+        }
+
+        /*ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp*/
+
+        /* Khung giá */
+        /* Khung giá */
+        .price-box2 {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            background: #e8e8e8;
+            padding: 12px 20px;
+            border-radius: 4px;
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* Cột bên trái (Giá gốc) */
+        .col-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cột giữa — CHỈ CẦN SỬA CÁI NÀY */
+        .col-mid {
+            display: flex;
+            flex-direction: row; /* >>> ĐỂ 2 THẰNG NẰM CHUNG 1 DÒNG */
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        /* Cột giảm % */
+        .col-right {
+            display: flex;
+            align-items: center;
+            margin-left: auto !important;
+            margin-right: 35px;
+        }
+
+        /* Giá gốc */
+        #oldPrice2 {
+            color: #e3562a !important;
+            font-size: 20px !important;
+            font-style: italic !important;
+            text-decoration: line-through !important;
+            font-weight: 700 !important;
+        }
+
+        /* “Chỉ còn” */
+        .col-mid .label {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        /* Giá sau giảm */
+        .sale-price2 {
+            font-size: 28px !important;
+            font-weight: 900;
+            color: #e6452d !important;
+        }
+
+
+        .label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .old-price2 {
+            text-decoration: line-through;
+            font-style: italic;
+            color: #777;
+            font-size: 15px;
+            margin-top: 2px;
+        }
+
+        .sale-price2 {
+            color: #d4281c;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* Nút Giảm % */
+        .discount-box {
+            background: #ff6b4a; /* màu đỏ nhạt đẹp hơn */
+            color: #fff;
+            font-size: 16px; /* bằng “Yêu thích” */
+            font-weight: 700;
+            padding: 7px 16px;
+            border-radius: 5px;
+            white-space: nowrap;
+            margin-left: auto; /* căn chắc chắn sang phải */
+            margin-right: 5px; /* nếu muốn sát biên */
+        }
+
+
+        /* 3 tiện ích */
+        .benefit-row {
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .benefit-item {
+            width: 33%;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
         }
 
 
@@ -303,8 +613,21 @@
 <!-- TITLE -->
 <div id="productNameCenter" class="product-title-center"></div>
 
-<div class="container">
 
+<div id="priceBox" class="price-box">
+    <div class="price-left">
+        <div class="label">Giá Chỉ:</div>
+        <div id="oldPrice" class="old-price"></div>
+    </div>
+
+    <div class="price-right">
+        <div id="salePrice" class="sale-price"></div>
+        <div class="ship">+ MIỄN PHÍ SHIP</div>
+    </div>
+</div>
+
+
+<div class="container">
 
     <div class="slider">
         <button class="slide-btn left-btn">&#8249;</button>
@@ -315,38 +638,91 @@
     </div>
 
 
-
-
     <div id="thumbnailList" class="thumbnail-container"></div>
 
+
+
+<!--    @todo-->
     <div class="block">
-        <span class="product-title" id="productName"></span>
-        <div class="price-area">
-            <span id="price" class="price"></span>
-            <span id="originalPrice" class="original-price"></span>
-            <span id="discountPercent" class="discount"></span>
-            <span id="soldCount" class="sold"></span>
-        </div>
+        <span class="product-title" id="productDetail"></span>
+
     </div>
-        <div class="block">
-            <div class="ship-block-row">
-                <span class="ship-title">Nhận vào Ngày Mai 12:00</span>
+    <!--        <div class="price-area">-->
+    <!--            <span id="price" class="price"></span>-->
+    <!--            <span id="originalPrice" class="original-price"></span>-->
+    <!--            <span id="discountPercent" class="discount"></span>-->
+    <!--            <span id="soldCount" class="sold"></span>-->
+    <!--        </div>-->
+
+
+
+
+
+
+
+
+    <!-- BLOCK THÔNG TIN THEO ẢNH -->
+    <div class="info-box">
+
+        <div class="line1">
+            <div class="left">
+                <span class="badge-like">Yêu thích</span>
             </div>
-            <div class="ship-block-row">
-                <span class="ship-free">Phí ship 0đ</span>
+
+            <div class="center">
+                <span class="warranty-text">BẢO HÀNH 12 THÁNG</span>
             </div>
-            <div class="info-small">Tặng Voucher 15.000đ nếu đơn giao trễ.</div>
+
+            <div class="right"></div> <!-- để cân bằng 2 bên -->
         </div>
 
-        <div class="block">
-            <div class="policy-row">
-                <span>🔒 Trả hàng miễn phí 15 ngày</span>
-                <span>•</span>
-                <span>Bảo hiểm bảo vệ người tiêu dùng</span>
+
+        <div class="line2">
+            <div class="col-rate">
+                <span class="rating-score">4.8</span>
+                <span class="rating-stars">★★★★★</span>
+            </div>
+
+            <div class="col-vote">
+                <span class="rating-count" id="voteCount">9.2k Đánh Giá</span>
+            </div>
+
+            <div class="col-sold">
+                <span class="sold-count" id="soldCount2"></span>
             </div>
         </div>
 
 
+        <div class="price-box2">
+            <div class="col-left">
+                <div class="label">Giá gốc:</div>
+                <div id="oldPrice2" class="old-price2"></div>
+            </div>
+
+            <div class="col-mid">
+                <div class="label mid-label">Chỉ còn</div>
+                <div id="salePrice2" class="sale-price2"></div>
+            </div>
+
+            <div class="col-right">
+                <div id="discount2" class="discount-box"></div>
+            </div>
+        </div>
+
+
+        <div class="benefit-row">
+            <div class="benefit-item">
+                🚚 Giao hàng nhanh chóng
+            </div>
+            <div class="benefit-item">
+                🛡️ Kiểm hàng trước khi thanh toán
+            </div>
+            <div class="benefit-item">
+                🔁 1 đổi 1 trong 12 tháng
+            </div>
+        </div>
+
+    </div>
 
 
     <!-- FORM -->
@@ -369,16 +745,16 @@
             </div>
 
 
-                <div class="option-group-title">Chọn mua:</div>
+            <div class="option-group-title">Chọn mua:</div>
 
-                <div class="options-wrapper" id="comboOptions">
-                    <!-- Render bằng JS -->
-                </div>
+            <div class="options-wrapper" id="comboOptions">
+                <!-- Render bằng JS -->
+            </div>
 
 
-                <!-- input ẩn gửi vào form -->
-                <input type="hidden" id="selectedCombo" value="">
-                <input type="hidden" id="selectedColor" value="Trắng">
+            <!-- input ẩn gửi vào form -->
+            <input type="hidden" id="selectedCombo" value="">
+            <input type="hidden" id="selectedColor" value="Trắng">
 
             <!-- hidden fields gửi vào form -->
             <input type="hidden" name="combo" id="formCombo">
@@ -394,6 +770,7 @@
     /* ====================== DATA SẢN PHẨM ====================== */
     const muc_1 = {
         name: "GỐI CÔNG THÁI HỌC",
+        detail: "Gối massage công nghệ Nhật Bản, hỗ trợ đau mỏi giảm căng thẳng",
         price: 199000,
         originalPrice: 400000,
         discountPercent: 50,
@@ -413,6 +790,9 @@
         ]
     };
 
+    document.title = muc_1.name;
+
+
     /* ====================== HIỂN THỊ TÊN 2 DÒNG ====================== */
     const parts = muc_1.name.split(" ");
     const half = Math.ceil(parts.length / 2);
@@ -424,11 +804,27 @@
     // ===== FLASH SALE PRICE =====
     document.getElementById("flashPrice").textContent =
         "#" + Math.round(muc_1.price / 1000) + "K";
-    document.getElementById("productName").textContent = muc_1.name;
-    document.getElementById("price").textContent = muc_1.price.toLocaleString() + "đ";
-    document.getElementById("originalPrice").textContent = muc_1.originalPrice.toLocaleString() + "đ";
-    document.getElementById("discountPercent").textContent = `-${muc_1.discountPercent}%`;
-    document.getElementById("soldCount").textContent = muc_1.soldCount;
+
+
+
+    document.getElementById("productDetail").textContent = muc_1.detail;
+
+    // giá dưưới tên dưới ảnh
+    document.getElementById("soldCount2").textContent = muc_1.soldCount;
+    document.getElementById("oldPrice2").textContent =
+        muc_1.originalPrice.toLocaleString("vi-VN") + " VND";
+    document.getElementById("salePrice2").textContent =
+        muc_1.price.toLocaleString("vi-VN") + " VND";
+    document.getElementById("discount2").textContent =
+        `Giảm ${muc_1.discountPercent}%`;
+
+
+    // Hiển thị giá dưới tên sản phẩm
+    document.getElementById("salePrice").innerText =
+        muc_1.price.toLocaleString("vi-VN") + " VNĐ / 1 Gối";
+
+    document.getElementById("oldPrice").innerText =
+        muc_1.originalPrice.toLocaleString("vi-VN") + " VNĐ";
 
     /* ====================== ẢNH & SLIDER ====================== */
     // document.getElementById("mainImage").src = muc_1.images[0];
@@ -497,9 +893,6 @@
     };
 
 
-
-
-
     /* ====================== COMBO OPTIONS ====================== */
     const comboWrapper = document.getElementById("comboOptions");
 
@@ -529,7 +922,7 @@
     /* ====================== CUỘN TỚI FORM KHI NHẤN BUY ====================== */
     document.getElementById("scrollToFormBtn").onclick = e => {
         e.preventDefault();
-        document.getElementById("orderForm").scrollIntoView({ behavior: "smooth" });
+        document.getElementById("orderForm").scrollIntoView({behavior: "smooth"});
     };
 </script>
 
