@@ -1,642 +1,537 @@
+
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Camera DA-8.1 - vietduc</title>
+    <title>Trang sản phẩm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* ===== HEADER FIXED ===== */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 600px;
+            background: #1f2a40;
+            color: #fff;
+            z-index: 9999;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+
+        .flash {
+            text-align: center;
+            font-weight: 900;
+            font-size: 22px;            /* chữ to giống ảnh */
+            letter-spacing: 1px;
+        }
+
+        .flash small {
+            font-size: 15px;
+            color: #dbe1ff;
+        }
+
+        .price-highlight {
+            color: #ff6a00;             /* màu cam như ảnh */
+            font-weight: 900;
+            font-size: 26px;
+        }
+
+
+
+        .btn-buy {
+            background: #ff6a00;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .cart-icon {
+            width: 22px;
+            height: 22px;
+            fill: white;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+
+        /* ===== TITLE ===== */
+        .product-title-center {
+            margin-top: 80px;
+            text-align: center;
+            font-size: 34px;       /* tăng từ 28px lên 34px */
+            font-weight: 750;      /* đậm hơn (700 → 800) */
+            font-style: italic;    /* thêm nghiêng */
+            color: #333;
+            padding: 10px 20px;
+            line-height: 1.3;
         }
 
         body {
-            background: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-            padding-bottom: 90px;
-            font-size: 14px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin:0;
+            background:#f5f5f5;
+            padding-top: 20px;   /* THÊM DÒNG NÀY */
+
         }
 
-        /* === THÔNG BÁO MUA HÀNG === */
-        .notification {
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-            z-index: 999;
-            max-width: 90%;
-            display: flex;
-            align-items: center;
-            opacity: 0;
-            transition: all 0.4s ease;
-            pointer-events: none;
-            font-size: 13px;
+        .container {
+            max-width: 600px;
+            margin: 5px auto 20px;
+            background:#fff;
+            border-radius:8px;
+            overflow:hidden;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .notification.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
-        }
-
-        .notification img {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            margin-right: 10px;
+        /* ẢNH CHÍNH */
+        .main-img {
+            width: 100%;
+            height: 280px;
             object-fit: cover;
         }
 
-        .noti-text strong {
-            color: #d32f2f;
-        }
 
-        .noti-time {
-            color: #888;
-            font-size: 11px;
-        }
 
-        /* === SLIDER === */
-        .slider-container {
-            position: relative;
-            overflow: hidden;
-            margin: 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+        /* ẢNH CHÍNH */
 
-        .slider {
+        .slide-wrap {
             display: flex;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease-in-out;
         }
 
-        .slide {
-            min-width: 100%;
-        }
+        .slide-wrap img {
+            width: calc(100% - 24px); /* tạo khoảng cách 12px mỗi bên */
+            margin: 0 12px;           /* cách hai bên ảnh */
+            aspect-ratio: 4 / 5;
+            max-height: 420px;
 
-        .slide img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .dots {
-            text-align: center;
-            padding: 8px;
-            background: rgba(0,0,0,0.05);
-        }
-
-        .dot {
-            display: inline-block;
-            width: 7px;
-            height: 7px;
-            background: #bbb;
-            border-radius: 50%;
-            margin: 0 4px;
-        }
-
-        .dot.active {
-            background: #d32f2f;
-        }
-
-        /* === ĐÁNH GIÁ TRUNG BÌNH === */
-        .rating-summary {
-            background: white;
-            margin: 15px;
-            padding: 15px;
+            object-fit: contain;   /* ảnh full – không cắt */
+            background: #fff;      /* giữ nền trắng tránh lộ màu */
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            text-align: center;
+            flex-shrink: 0;
         }
 
-        .avg-rating {
-            font-size: 32px;
-            font-weight: bold;
-            color: #d32f2f;
-        }
 
-        .stars {
-            color: #ffb400;
-            font-size: 20px;
-            margin: 5px 0;
-        }
 
-        .review-count {
-            color: #666;
-            font-size: 13px;
+        /* ALBUM */
+        .thumbnail-container {
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
         }
-
-        .progress-bar {
-            height: 6px;
-            background: #eee;
-            border-radius: 3px;
-            margin: 5px 0;
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
-            background: #4caf50;
-            border-radius: 3px;
-        }
-
-        /* === ƯU ĐÃI HÔM NAY === */
-        .offer-banner {
-            background: linear-gradient(135deg, #d32f2f, #f44336);
-            color: white;
-            margin: 15px;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .offer-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .price del {
-            font-size: 16px;
-            opacity: 0.8;
-        }
-
-        .price strong {
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .countdown {
-            margin: 15px 0;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .countdown span {
-            background: rgba(255,255,255,0.3);
-            padding: 6px 10px;
+        .thumbnail {
+            width: 80px;
+            height: 80px;
             border-radius: 6px;
-            margin: 0 2px;
-            min-width: 36px;
-            display: inline-block;
+            object-fit: cover;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .thumbnail.active {
+            border-color: #ee4d2d;
         }
 
-        .countdown-label {
-            font-size: 11px;
-            opacity: 0.9;
+        .block {
+            padding: 15px;
+            border-bottom: 10px solid #f5f5f5;
         }
 
-        /* === FORM ĐẶT HÀNG === */
+        .product-title { font-size: 22px; font-weight: 700; }
+        .price-area { display:flex; align-items:center; gap:8px; }
+        .price { font-size:30px; color:#ee4d2d; font-weight:bold; }
+        .original-price { text-decoration:line-through; color:#888; }
+        .discount { background:#ffe5e0; color:#ee4d2d; padding:2px 5px; border-radius:4px; font-size:12px; }
+        .sold { margin-left:auto; color:#444; font-size:14px; }
+
+        /* ===== OPTION CHỌN SẢN PHẨM ===== */
+        .option-group-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .options-wrapper {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .option-item {
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            background: #fafafa;
+        }
+
+        .option-item.active {
+            border-color: #ee4d2d;
+            background: #ffe9e4;
+            color: #d02b0f;
+        }
+
+        /* ===== FORM ===== */
         .order-form {
-            background: white;
-            margin: 15px;
             padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border: 2px solid #d32f2f;
+            background: #ffffff;
+            border-top: 10px solid #f5f5f5;
         }
 
         .form-title {
             text-align: center;
-            font-size: 20px;
-            color: #d32f2f;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .form-note {
-            font-size: 13px;
-            color: #d32f2f;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 15px;
-        }
-
-        .btn-order {
-            background: #d32f2f;
-            color: white;
-            border: none;
-            padding: 14px;
-            width: 100%;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .form-footer {
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-            margin-top: 10px;
-        }
-
-        /* === ĐÁNH GIÁ KHÁCH HÀNG === */
-        .reviews {
-            margin: 15px;
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .review {
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
-            display: flex;
-        }
-
-        .review:last-child {
-            border-bottom: none;
-        }
-
-        .review-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 10px;
-        }
-
-        .review-content {
-            flex: 1;
-        }
-
-        .review-name {
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .review-time {
-            font-size: 11px;
-            color: #888;
-        }
-
-        .review-text {
-            margin: 5px 0;
-            font-size: 13px;
-        }
-
-        .review-photo {
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
-            object-fit: cover;
-            margin-top: 8px;
-        }
-
-        .verified {
-            color: #4caf50;
-            font-size: 12px;
-            margin-top: 3px;
-        }
-
-        /* === FOOTER === */
-        .footer {
-            background: #1a1a1a;
-            color: #ccc;
-            padding: 20px;
-            text-align: center;
-            font-size: 13px;
-            margin-top: 20px;
-        }
-
-        .footer h3 {
-            color: white;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        .footer a {
-            color: #4caf50;
-            text-decoration: none;
-        }
-
-        .policy {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 15px 0;
-        }
-
-        .policy-item {
-            text-align: center;
-            margin: 10px;
-            flex: 1;
-            min-width: 100px;
-        }
-
-        .policy-item i {
-            font-size: 24px;
-            color: #4caf50;
+            font-size: 22px;
+            font-weight: 700;
+            color: #d84315;
             margin-bottom: 5px;
         }
 
-        /* === NÚT MUA NGAY + HOTLINE === */
-        .fixed-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #1a1a1a;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
-        }
-
-        .hotline {
-            color: white;
+        .form-note {
+            text-align: center;
             font-size: 14px;
-        }
-
-        .hotline strong {
-            color: #4caf50;
-            font-size: 16px;
-        }
-
-        .btn-buy {
-            background: #ffeb3b;
-            color: #d32f2f;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 16px;
-            min-width: 120px;
-        }
-
-        .call-btn {
-            background: #2196f3;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 50%;
-            font-size: 18px;
-            margin-left: 10px;
-        }
-
-        /* === LOADING OVERLAY === */
-        .overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            flex-direction: column;
-            color: white;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #fff;
-            border-top: 5px solid #d32f2f;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+            color: #555;
             margin-bottom: 15px;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .form-group { margin-bottom: 12px; }
+
+        .order-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
         }
+
+        .btn-order {
+            width: 100%;
+            padding: 14px;
+            background: #ff6a00;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+
+
+        .slider {
+            position: relative;
+            overflow: hidden;
+            padding: 12px;
+            background: #fff; /* tạo khung trắng rõ hơn */
+        }
+
+
+        /*    */
+        /* ===== NÚT TRÁI PHẢI SLIDER ===== */
+        .slide-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 48px;
+            font-weight: bold;
+            color: #bbbbbb;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 50;
+            padding: 0 10px;
+            line-height: 1;
+            user-select: none;
+        }
+
+        .left-btn {
+            left: 0;    /* nằm sát mép ảnh */
+        }
+
+        .right-btn {
+            right: 0;   /* nằm sát mép ảnh */
+        }
+
+        .slide-btn:active {
+            transform: translateY(-50%) scale(0.9);
+        }
+
+
     </style>
 </head>
+
 <body>
 
-<!-- THÔNG BÁO MUA HÀNG -->
-<div class="notification" id="notification">
-    <img th:src="@{/images/avatar1.jpg}" alt="KH">
-    <div>
-        <div class="noti-text" id="noti-text"></div>
-        <div class="noti-time" id="noti-time"></div>
+<!-- HEADER -->
+<div class="fixed-header">
+    <div class="flash">
+        ⚡ FLASH SALE ⚡<br>
+        <small>Chỉ còn <span id="flashPrice" class="price-highlight"></span></small>
     </div>
+
+
+    <a class="btn-buy" href="#" id="scrollToFormBtn">
+        <svg class="cart-icon" viewBox="0 0 24 24">
+            <path fill="white"
+                  d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9
+                 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22
+                 17 22s2-.9 2-2-.9-2-2-2zM7.16 14.26l.03.01 9.48.01c.75
+                 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 21.1 5H6.21l-.94-2H1v2h3l3.6
+                 7.59-1.35 2.44C5.11 15.37 5 15.67 5 16c0 1.1.9 2 2 2h12v-2H7l1.16-1.74z"/>
+        </svg>
+
+        MUA NGAY<br>
+        <small>(xem hàng mới trả tiền)</small>
+    </a>
+
 </div>
 
-<!-- SLIDER ẢNH -->
-<div class="slider-container">
-    <div class="slider" id="slider">
-        <div class="slide"><img th:src="@{/images/da81-1.jpg}" alt="Camera DA-8.1"></div>
-        <div class="slide"><img th:src="@{/images/da81-2.jpg}" alt="Camera DA-8.1"></div>
-        <div class="slide"><img th:src="@{/images/da81-3.jpg}" alt="Camera DA-8.1"></div>
-    </div>
-    <div class="dots" id="dots"></div>
-</div>
+<!-- TITLE -->
+<div id="productNameCenter" class="product-title-center"></div>
 
-<!-- ĐÁNH GIÁ TRUNG BÌNH -->
-<div class="rating-summary">
-    <div class="avg-rating">5/5</div>
-    <div class="stars">★★★★★</div>
-    <div class="review-count">1.545 nhận xét</div>
-    <div style="margin: 10px 0; text-align: left;">
-        <div style="display: flex; align-items: center; margin: 4px 0;">
-            <span style="width: 30px;">5★</span>
-            <div class="progress-bar" style="flex:1; margin:0 8px;"><div class="progress" style="width:100%;"></div></div>
-            <span>100%</span>
-        </div>
-        <div style="display: flex; align-items: center; margin: 4px 0;">
-            <span style="width: 30px;">4★</span>
-            <div class="progress-bar" style="flex:1; margin:0 8px;"><div class="progress" style="width:0%;"></div></div>
-            <span>0%</span>
-        </div>
-    </div>
-</div>
+<div class="container">
 
-<!-- ƯU ĐÃI HÔM NAY -->
-<div class="offer-banner">
-    <div class="offer-title">CHỈ DUY NHẤT HÔM NAY</div>
-    <img th:src="@{/images/da81-promo.jpg}" style="width:100%; border-radius:8px; margin:10px 0;">
-    <div class="price">
-        <del>1.336.000đ</del> → <strong>900.000đ</strong>
-    </div>
-    <div class="countdown" id="countdown">
-        <span>01</span><span>28</span><span>31</span>
-    </div>
-    <div class="countdown-label">Giờ  Phút  Giây</div>
-</div>
-<!--https://landingpage-x7x5.onrender.com/vietduc/submit-->
-<!--&lt;!&ndash; FORM ĐẶT HÀNG &ndash;&gt; -->
-<div class="order-form" id="orderForm">
-    <div class="form-title">ĐĂNG KÝ ĐẶT HÀNG</div>
-    <div class="form-note">* Vui lòng điền đầy đủ thông tin dưới đây</div>
-    <form id="submitForm" th:action="@{/vietduc/submit}" method="post">
-        <div class="form-group">
-            <input type="text" name="name" placeholder="Họ và tên" required>
-        </div>
-        <div class="form-group">
-            <input type="tel" name="phone" placeholder="Số điện thoại" required>
-        </div>
-        <div class="form-group">
-            <input type="text" name="address" placeholder="Địa chỉ" required>
-        </div>
-        <div class="form-group">
-            <input type="text" name="note" placeholder="Để lại lời nhắn cho chúng tôi">
-        </div>
-        <button type="submit" class="btn-order">ĐẶT HÀNG NGAY</button>
-        <div class="form-footer">
-            Chúng tôi sẽ liên hệ lại để xác nhận đơn hàng trong 24h. Quý khách vui lòng giữ máy!
-        </div>
-    </form>
-</div>
 
-<!-- ĐÁNH GIÁ KHÁCH HÀNG -->
-<div class="reviews">
-    <div class="review">
-        <img th:src="@{/images/kh1.jpg}" class="review-img">
-        <div class="review-content">
-            <div class="review-name">Trần Đức</div>
-            <div class="review-time">Hôm nay</div>
-            <div class="stars">★★★★★</div>
-            <div class="review-text">Sản phẩm rất tốt, mình mua để test sau nhập về bán luôn, nói chung giá ổn nhỏ gọn rất tiện cho công việc...</div>
-            <div class="verified">Chứng nhận đã mua hàng</div>
-            <img th:src="@{/images/review1.jpg}" class="review-photo">
-        </div>
-    </div>
-    <div class="review">
-        <img th:src="@{/images/kh2.jpg}" class="review-img">
-        <div class="review-content">
-            <div class="review-name">Huy Hùng</div>
-            <div class="review-time">Hôm nay</div>
-            <div class="stars">★★★★★</div>
-            <div class="review-text">Rất thích camera mini chống nhiệt này, à shop tư vấn cũng nhiệt tình. Dùng để đi chơi...</div>
-            <div class="verified">Chứng nhận đã mua hàng</div>
-        </div>
-    </div>
-</div>
+    <div class="slider">
+        <button class="slide-btn left-btn">&#8249;</button>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <h3>CÔNG TY TNHH ĐẦU TƯ VÀ PHÁT TRIỂN CÔNG NGHỆ INNOTECH</h3>
-    <p>Địa chỉ: 38b, Triều Việt Vương, Nguyễn Du, HBT, Hà Nội</p>
-    <p>Hotline: <a href="tel:1900638597">1900638597</a></p>
-    <p>Website: <a href="https://www.vietduc.store/dad8.1" target="_blank">www.vietducvietnam.store/dad8.1</a></p>
-    <div class="policy">
-        <div class="policy-item">
-            <i class="fas fa-truck"></i>
-            <div>Chính sách vận chuyển</div>
-        </div>
-        <div class="policy-item">
-            <i class="fas fa-shield-alt"></i>
-            <div>Chính sách bảo hành</div>
-        </div>
-        <div class="policy-item">
-            <i class="fas fa-credit-card"></i>
-            <div>Chính sách thanh toán</div>
-        </div>
-        <div class="policy-item">
-            <i class="fas fa-lock"></i>
-            <div>Chính sách bảo mật</div>
-        </div>
-    </div>
-    <p style="margin-top: 15px; font-size: 11px;">©2018 Đã đăng ký bản quyền</p>
-</footer>
+        <div class="slide-wrap" id="slideWrap"></div>
 
-<!-- NÚT MUA NGAY + GỌI NGAY -->
-<div class="fixed-bottom">
-    <div class="hotline">
-        HOTLINE: <strong>1900638597</strong><br>
-        <small>(Sản phẩm chính hãng vietduc)</small>
+        <button class="slide-btn right-btn">&#8250;</button>
     </div>
-    <div>
-        <button class="btn-buy" onclick="scrollToForm()">MUA NGAY</button>
-        <a href="tel:+84369936031" class="call-btn">Phone</a>
-    </div>
-</div>
 
-<!-- LOADING -->
-<div class="overlay" id="overlay">
-    <div class="spinner"></div>
-    <div>Đang gửi thông tin...</div>
+
+
+
+    <div id="thumbnailList" class="thumbnail-container"></div>
+
+    <div class="block">
+        <span class="product-title" id="productName"></span>
+        <div class="price-area">
+            <span id="price" class="price"></span>
+            <span id="originalPrice" class="original-price"></span>
+            <span id="discountPercent" class="discount"></span>
+            <span id="soldCount" class="sold"></span>
+        </div>
+    </div>
+        <div class="block">
+            <div class="ship-block-row">
+                <span class="ship-title">Nhận vào Ngày Mai 12:00</span>
+            </div>
+            <div class="ship-block-row">
+                <span class="ship-free">Phí ship 0đ</span>
+            </div>
+            <div class="info-small">Tặng Voucher 15.000đ nếu đơn giao trễ.</div>
+        </div>
+
+        <div class="block">
+            <div class="policy-row">
+                <span>🔒 Trả hàng miễn phí 15 ngày</span>
+                <span>•</span>
+                <span>Bảo hiểm bảo vệ người tiêu dùng</span>
+            </div>
+        </div>
+
+
+
+
+    <!-- FORM -->
+    <div class="order-form" id="orderForm">
+        <div class="form-title">ĐĂNG KÝ ĐẶT HÀNG</div>
+        <div class="form-note">Hãy nhập thông tin để đặt hàng</div>
+
+        <form action="/vietduc/submit" method="post">
+
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Họ và tên" required>
+            </div>
+
+            <div class="form-group">
+                <input type="tel" name="phone" placeholder="Số điện thoại" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="address" placeholder="Địa chỉ" required>
+            </div>
+
+
+                <div class="option-group-title">Chọn mua:</div>
+
+                <div class="options-wrapper" id="comboOptions">
+                    <!-- Render bằng JS -->
+                </div>
+
+
+                <!-- input ẩn gửi vào form -->
+                <input type="hidden" id="selectedCombo" value="">
+                <input type="hidden" id="selectedColor" value="Trắng">
+
+            <!-- hidden fields gửi vào form -->
+            <input type="hidden" name="combo" id="formCombo">
+
+            <button class="btn-order" type="submit">ĐẶT HÀNG NGAY</button>
+
+        </form>
+    </div>
+
 </div>
 
 <script>
-    // === SLIDER ===
-    let slideIndex = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dotsContainer = document.getElementById('dots');
-    slides.forEach((_, i) => {
-        const dot = document.createElement('span');
-        dot.classList.add('dot');
-        if (i === 0) dot.classList.add('active');
-        dot.onclick = () => goToSlide(i);
-        dotsContainer.appendChild(dot);
+    /* ====================== DATA SẢN PHẨM ====================== */
+    const muc_1 = {
+        name: "GỐI CÔNG THÁI HỌC",
+        price: 199000,
+        originalPrice: 400000,
+        discountPercent: 50,
+        soldCount: "Đã bán 20k+",
+        images: [
+            "/images/thong-tin-goi-1.webp",
+            "/images/thong-tin-goi-2.webp",
+            "/images/thong-tin-goi-3.webp",
+            "/images/thong-tin-goi-4.webp",
+            "/images/thong-tin-goi-7.webp",
+            "/images/anh-goi-gai-ngua.png",
+            "/images/anh-goi-gai-up.png"
+        ],
+        combos: [
+            "Mua lẻ - 1 chiếc : 199k miễn ship",
+            "Combo 2 chiếc : 350k miễn ship"
+        ]
+    };
+
+    /* ====================== HIỂN THỊ TÊN 2 DÒNG ====================== */
+    const parts = muc_1.name.split(" ");
+    const half = Math.ceil(parts.length / 2);
+    // document.getElementById("productNameCenter").innerHTML =
+    //     parts.slice(0, half).join(" ") + "<br>" + parts.slice(half).join(" ");
+
+    document.getElementById("productNameCenter").innerHTML = parts.join(" ");
+
+    // ===== FLASH SALE PRICE =====
+    document.getElementById("flashPrice").textContent =
+        "#" + Math.round(muc_1.price / 1000) + "K";
+    document.getElementById("productName").textContent = muc_1.name;
+    document.getElementById("price").textContent = muc_1.price.toLocaleString() + "đ";
+    document.getElementById("originalPrice").textContent = muc_1.originalPrice.toLocaleString() + "đ";
+    document.getElementById("discountPercent").textContent = `-${muc_1.discountPercent}%`;
+    document.getElementById("soldCount").textContent = muc_1.soldCount;
+
+    /* ====================== ẢNH & SLIDER ====================== */
+    // document.getElementById("mainImage").src = muc_1.images[0];
+    const thumbList = document.getElementById("thumbnailList");
+
+    muc_1.images.forEach((img, index) => {
+        let el = document.createElement("img");
+        el.src = img;
+        el.className = "thumbnail";
+        if (index === 0) el.classList.add("active");
+
+        el.onclick = () => {
+            current = index;
+            wrap.style.transform = `translateX(-${current * 100}%)`;
+
+            document.querySelectorAll(".thumbnail")
+                .forEach(t => t.classList.remove("active"));
+            el.classList.add("active");
+        };
+
+        thumbList.appendChild(el);
     });
 
-    function goToSlide(n) {
-        slideIndex = n;
-        document.getElementById('slider').style.transform = `translateX(-${slideIndex * 100}%)`;
-        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === slideIndex));
-    }
+    /* AUTO SLIDE */
+    /* SLIDER TRƯỢT */
+    const wrap = document.getElementById("slideWrap");
+    muc_1.images.forEach(img => {
+        const im = document.createElement("img");
+        im.src = img;
+        wrap.appendChild(im);
+    });
 
-    setInterval(() => goToSlide((slideIndex + 1) % slides.length), 4000);
-
-    // === THÔNG BÁO MUA HÀNG ===
-    const names = ['Nguyễn Văn Hiệp', 'Trần Tất Cường', 'An Bảo Long', 'Lê Văn Công', 'Hoàng Yến'];
-    const qty = [1, 2, 3, 4];
-    const times = ['3 phút', '4 phút', '5 phút', '8 phút', '10 phút'];
-
-    function showNoti() {
-        const name = names[Math.floor(Math.random() * names.length)];
-        const q = qty[Math.floor(Math.random() * qty.length)];
-        const t = times[Math.floor(Math.random() * times.length)];
-        document.getElementById('noti-text').innerHTML = `<strong>${name}</strong> đã mua <strong>${q} sản phẩm</strong>`;
-        document.getElementById('noti-time').textContent = `${t} trước`;
-        const noti = document.getElementById('notification');
-        noti.classList.add('show');
-        setTimeout(() => noti.classList.remove('show'), 2800);
-    }
-
-    setInterval(showNoti, 3000);
-    setTimeout(showNoti, 1200);
-
-    // === ĐỒNG HỒ ĐẾM NGƯỢC ===
-    let countdown = 1 * 3600 + 28 * 60 + 31; // 1h28p31s
-    const cdEl = document.getElementById('countdown');
+    let current = 0;
     setInterval(() => {
-        if (countdown <= 0) return;
-        const h = String(Math.floor(countdown / 3600)).padStart(2, '0');
-        const m = String(Math.floor((countdown % 3600) / 60)).padStart(2, '0');
-        const s = String(countdown % 60).padStart(2, '0');
-        cdEl.innerHTML = `<span>${h}</span><span>${m}</span><span>${s}</span>`;
-        countdown--;
-    }, 1000);
+        current++;
+        if (current >= muc_1.images.length) current = 0;
+        wrap.style.transform = `translateX(-${current * 100}%)`;
 
-    // === CUỘN VỀ FORM ===
-    function scrollToForm() {
-        document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
-    }
+        document.querySelectorAll(".thumbnail").forEach((t, i) => {
+            t.classList.toggle("active", i === current);
+        });
 
-    // === LOADING KHI GỬI ===
-    document.getElementById('submitForm').addEventListener('submit', function(e) {
-        document.getElementById('overlay').style.display = 'flex';
-        // setTimeout(() => this.submit(), 1500); // Nếu dùng AJAX
+    }, 3000);
+
+    /* ===== NÚT TRÁI PHẢI ===== */
+    document.querySelector(".left-btn").onclick = () => {
+        current--;
+        if (current < 0) current = muc_1.images.length - 1;
+
+        wrap.style.transform = `translateX(-${current * 100}%)`;
+
+        document.querySelectorAll(".thumbnail").forEach((t, i) => {
+            t.classList.toggle("active", i === current);
+        });
+    };
+
+    document.querySelector(".right-btn").onclick = () => {
+        current++;
+        if (current >= muc_1.images.length) current = 0;
+
+        wrap.style.transform = `translateX(-${current * 100}%)`;
+
+        document.querySelectorAll(".thumbnail").forEach((t, i) => {
+            t.classList.toggle("active", i === current);
+        });
+    };
+
+
+
+
+
+    /* ====================== COMBO OPTIONS ====================== */
+    const comboWrapper = document.getElementById("comboOptions");
+
+    muc_1.combos.forEach((text, index) => {
+        const el = document.createElement("div");
+        el.className = "option-item" + (index === 0 ? " active" : "");
+        el.textContent = text;
+        el.dataset.value = text;
+
+        el.onclick = () => {
+            document.querySelectorAll("#comboOptions .option-item")
+                .forEach(t => t.classList.remove("active"));
+            el.classList.add("active");
+
+            document.getElementById("selectedCombo").value = text;
+            document.getElementById("formCombo").value = text;
+        };
+
+        comboWrapper.appendChild(el);
     });
+
+    /* Set mặc định */
+    document.getElementById("selectedCombo").value = muc_1.combos[0];
+    document.getElementById("formCombo").value = muc_1.combos[0];
+
+
+    /* ====================== CUỘN TỚI FORM KHI NHẤN BUY ====================== */
+    document.getElementById("scrollToFormBtn").onclick = e => {
+        e.preventDefault();
+        document.getElementById("orderForm").scrollIntoView({ behavior: "smooth" });
+    };
 </script>
+
 </body>
 </html>

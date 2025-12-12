@@ -21,13 +21,20 @@ public class VietDucController {
     public String submitForm(
             @RequestParam String name,
             @RequestParam String phone,
-            @RequestParam String address) {
+            @RequestParam String address,
+            @RequestParam String combo) {
 
         // TẠO JSON THỦ CÔNG
+//        String json = String.format(
+//                "{\"name\":\"%s\",\"phone\":\"%s\",\"address\":\"%s\"}",
+//                name, phone, address
+//        );
+
         String json = String.format(
-                "{\"name\":\"%s\",\"phone\":\"%s\",\"address\":\"%s\"}",
-                name, phone, address
+                "{\"name\":\"%s\",\"phone\":\"%s\",\"address\":\"%s\",\"combo\":\"%s\"}",
+                name, phone, address, combo
         );
+
 
         // Tạo HttpClient (Java 11+)
         java.net.http.HttpClient client = java.net.http.HttpClient.newBuilder()

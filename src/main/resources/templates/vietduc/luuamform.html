@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Camera DA-8.1 - vietduc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/product.css">
+  <style></style>
+
+
+</head>
+<body>
+
+<!-- THÔNG BÁO MUA HÀNG -->
+<div class="notification" id="notification">
+  <img th:src="@{/images/avatar1.jpg}" alt="KH">
+  <div>
+    <div class="noti-text" id="noti-text"></div>
+    <div class="noti-time" id="noti-time"></div>
+  </div>
+</div>
+
+
+<div class="container">
+  <!-- Ảnh chính -->
+  <img id="mainImage" class="main-img" src="https://cf.shopee.vn/file/sg-11134258-7rdxy-m1o7i5g7z7p0d8" alt="CATBOX Perfect">
+
+  <!-- Carousel ảnh nhỏ -->
+  <div class="thumbnail-container">
+    <img class="thumbnail active" src="https://cf.shopee.vn/file/sg-11134258-7rdxy-m1o7i5g7z7p0d8" onclick="changeImage(this)">
+    <img class="thumbnail" src="https://cf.shopee.vn/file/sg-11134258-7rdxy-m1o7i5g7z7p0d9" onclick="changeImage(this)">
+    <img class="thumbnail" src="https://cf.shopee.vn/file/sg-11134258-7rdxy-m1o7i5g7z7p0e0" onclick="changeImage(this)">
+    <img class="thumbnail" src="https://cf.shopee.vn/file/sg-11134258-7rdxy-m1o7i5g7z7p0e1" onclick="changeImage(this)">
+    <img class="thumbnail" src="https://cf.shopee.vn/file/sg-11134258-7rdxy-m1o7i5g7z7p0e2" onclick="changeImage(this)">
+    <img class="thumbnail" src="https://cf.shopee.vn/file/sg-11134258-7rdxy-m1o7i5g7z7p0e3" onclick="changeImage(this)">
+    <img class="thumbnail" src="https://cf.shopee.vn/file/sg-11134258-7rdxy-m1o7i5g7z7p0e4" onclick="changeImage(this)">
+    <img class="thumbnail" src="https://cf.shopee.vn/file/sg-11134258-7rdxy-m1o7i5g7z7p0e5" onclick="changeImage(this)">
+  </div>
+
+  <!-- Thông tin sản phẩm -->
+  <div class="info">
+    <h1 style="margin:0; font-size:20px;">
+      <span class="badge">Yêu thích+</span>
+      Cát vệ sinh cho mèo CATBOX bao to 26,5L 12KG 8KG 4KG
+    </h1>
+
+    <div style="margin:15px 0;">
+      <span class="price">74.715đ</span>
+      <span class="original-price">150.000đ</span>
+      <span style="background:#eee; padding:2px 6px; border-radius:4px; font-size:12px; margin-left:8px;">-50%</span>
+    </div>
+
+    <div style="color:#ee4d2d; font-size:14px;">
+      Đã bán 20k+
+      <span style="color:#fff; background:#ee4d2d; padding:2px 6px; border-radius:12px; margin-left:8px;">12.12 VOUCHER XTRA</span>
+    </div>
+
+    <div class="flash-sale">
+      Flash Sale bắt đầu lúc 21:00, 12 Tháng 12
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ƯU ĐÃI HÔM NAY -->
+<div class="offer-banner">
+  <div class="offer-title">CHỈ DUY NHẤT HÔM NAY</div>
+  <img th:src="@{/images/da81-promo.jpg}" style="width:100%; border-radius:8px; margin:10px 0;">
+  <div class="price">
+    <del>1.336.000đ</del> → <strong>900.000đ</strong>
+  </div>
+  <div class="countdown" id="countdown">
+    <span>01</span><span>28</span><span>31</span>
+  </div>
+  <div class="countdown-label">Giờ  Phút  Giây</div>
+</div>
+<!--https://landingpage-x7x5.onrender.com/vietduc/submit-->
+<!--&lt;!&ndash; FORM ĐẶT HÀNG &ndash;&gt; -->
+<div class="order-form" id="orderForm">
+  <div class="form-title">ĐĂNG KÝ ĐẶT HÀNG</div>
+  <div class="form-note">* Vui lòng điền đầy đủ thông tin dưới đây</div>
+  <form id="submitForm" th:action="@{/vietduc/submit}" method="post">
+    <div class="form-group">
+      <input type="text" name="name" placeholder="Họ và tên" required>
+    </div>
+    <div class="form-group">
+      <input type="tel" name="phone" placeholder="Số điện thoại" required>
+    </div>
+    <div class="form-group">
+      <input type="text" name="address" placeholder="Địa chỉ" required>
+    </div>
+    <div class="form-group">
+      <input type="text" name="note" placeholder="Để lại lời nhắn cho chúng tôi">
+    </div>
+    <button type="submit" class="btn-order">ĐẶT HÀNG NGAY</button>
+    <div class="form-footer">
+      Chúng tôi sẽ liên hệ lại để xác nhận đơn hàng trong 24h. Quý khách vui lòng giữ máy!
+    </div>
+  </form>
+</div>
+
+<!-- ĐÁNH GIÁ TRUNG BÌNH -->
+<div class="rating-summary">
+  <div class="avg-rating">5/5</div>
+  <div class="stars">★★★★★</div>
+  <div class="review-count">1.545 nhận xét</div>
+  <div style="margin: 10px 0; text-align: left;">
+    <div style="display: flex; align-items: center; margin: 4px 0;">
+      <span style="width: 30px;">5★</span>
+      <div class="progress-bar" style="flex:1; margin:0 8px;"><div class="progress" style="width:100%;"></div></div>
+      <span>100%</span>
+    </div>
+    <div style="display: flex; align-items: center; margin: 4px 0;">
+      <span style="width: 30px;">4★</span>
+      <div class="progress-bar" style="flex:1; margin:0 8px;"><div class="progress" style="width:0%;"></div></div>
+      <span>0%</span>
+    </div>
+  </div>
+</div>
+
+<!-- ĐÁNH GIÁ KHÁCH HÀNG -->
+<div class="reviews">
+  <div class="review">
+    <img th:src="@{/images/kh1.jpg}" class="review-img">
+    <div class="review-content">
+      <div class="review-name">Trần Đức</div>
+      <div class="review-time">Hôm nay</div>
+      <div class="stars">★★★★★</div>
+      <div class="review-text">Sản phẩm rất tốt, mình mua để test sau nhập về bán luôn, nói chung giá ổn nhỏ gọn rất tiện cho công việc...</div>
+      <div class="verified">Chứng nhận đã mua hàng</div>
+      <img th:src="@{/images/review1.jpg}" class="review-photo">
+    </div>
+  </div>
+  <div class="review">
+    <img th:src="@{/images/kh2.jpg}" class="review-img">
+    <div class="review-content">
+      <div class="review-name">Huy Hùng</div>
+      <div class="review-time">Hôm nay</div>
+      <div class="stars">★★★★★</div>
+      <div class="review-text">Rất thích camera mini chống nhiệt này, à shop tư vấn cũng nhiệt tình. Dùng để đi chơi...</div>
+      <div class="verified">Chứng nhận đã mua hàng</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h3>CÔNG TY TNHH ĐẦU TƯ VÀ PHÁT TRIỂN CÔNG NGHỆ INNOTECH</h3>
+  <p>Địa chỉ: 38b, Triều Việt Vương, Nguyễn Du, HBT, Hà Nội</p>
+  <p>Hotline: <a href="tel:1900638597">1900638597</a></p>
+  <p>Website: <a href="https://www.vietduc.store/dad8.1" target="_blank">www.vietducvietnam.store/dad8.1</a></p>
+  <div class="policy">
+    <div class="policy-item">
+      <i class="fas fa-truck"></i>
+      <div>Chính sách vận chuyển</div>
+    </div>
+    <div class="policy-item">
+      <i class="fas fa-shield-alt"></i>
+      <div>Chính sách bảo hành</div>
+    </div>
+    <div class="policy-item">
+      <i class="fas fa-credit-card"></i>
+      <div>Chính sách thanh toán</div>
+    </div>
+    <div class="policy-item">
+      <i class="fas fa-lock"></i>
+      <div>Chính sách bảo mật</div>
+    </div>
+  </div>
+  <p style="margin-top: 15px; font-size: 11px;">©2018 Đã đăng ký bản quyền</p>
+</footer>
+
+
+<div class="fixed-bottom" style="padding:12px 15px; border-top:1px solid #ccc; display:flex; justify-content:space-between; align-items:center;">
+
+  <div style="line-height:1.3;">
+    <div style="font-size:15px; font-weight:700;">⚡ Camera DA-8.1 Chính Hãng</div>
+    <div style="font-size:13px; color:#28a745; font-weight:600;">🎁 Số lượng ưu đãi còn: <span style="color:#ee4d2d;">23 suất</span></div>
+  </div>
+
+  <button onclick="scrollToForm()"
+          style="background:#ee4d2d; color:#fff; padding:10px 22px; font-size:15px; font-weight:700; border:none; border-radius:10px;">
+    MUA NGAY
+  </button>
+</div>
+
+
+<!-- LOADING -->
+<div class="overlay" id="overlay">
+  <div class="spinner"></div>
+  <div>Đang gửi thông tin...</div>
+</div>
+
+<script>
+  function changeImage(thumb) {
+    // Đổi ảnh chính
+    document.getElementById('mainImage').src = thumb.src;
+
+    // Xóa class active của tất cả thumbnail
+    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+
+    // Thêm class active cho thumbnail đang chọn
+    thumb.classList.add('active');
+  }
+
+
+
+
+  // === SLIDER ===
+  let slideIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goToSlide(n) {
+    slideIndex = n;
+    document.getElementById('slider').style.transform = `translateX(-${slideIndex * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === slideIndex));
+  }
+
+  setInterval(() => goToSlide((slideIndex + 1) % slides.length), 4000);
+
+  // === THÔNG BÁO MUA HÀNG ===
+  const names = ['Nguyễn Văn Hiệp', 'Trần Tất Cường', 'An Bảo Long', 'Lê Văn Công', 'Hoàng Yến'];
+  const qty = [1, 2, 3, 4];
+  const times = ['3 phút', '4 phút', '5 phút', '8 phút', '10 phút'];
+
+  function showNoti() {
+    const name = names[Math.floor(Math.random() * names.length)];
+    const q = qty[Math.floor(Math.random() * qty.length)];
+    const t = times[Math.floor(Math.random() * times.length)];
+    document.getElementById('noti-text').innerHTML = `<strong>${name}</strong> đã mua <strong>${q} sản phẩm</strong>`;
+    document.getElementById('noti-time').textContent = `${t} trước`;
+    const noti = document.getElementById('notification');
+    noti.classList.add('show');
+    setTimeout(() => noti.classList.remove('show'), 2800);
+  }
+
+  setInterval(showNoti, 3000);
+  setTimeout(showNoti, 1200);
+
+  // === ĐỒNG HỒ ĐẾM NGƯỢC ===
+  let countdown = 1 * 3600 + 28 * 60 + 31; // 1h28p31s
+  const cdEl = document.getElementById('countdown');
+  setInterval(() => {
+    if (countdown <= 0) return;
+    const h = String(Math.floor(countdown / 3600)).padStart(2, '0');
+    const m = String(Math.floor((countdown % 3600) / 60)).padStart(2, '0');
+    const s = String(countdown % 60).padStart(2, '0');
+    cdEl.innerHTML = `<span>${h}</span><span>${m}</span><span>${s}</span>`;
+    countdown--;
+  }, 1000);
+
+  // === CUỘN VỀ FORM ===
+  function scrollToForm() {
+    document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // === LOADING KHI GỬI ===
+  document.getElementById('submitForm').addEventListener('submit', function(e) {
+    document.getElementById('overlay').style.display = 'flex';
+    // setTimeout(() => this.submit(), 1500); // Nếu dùng AJAX
+  });
+</script>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Trang sản phẩm</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin:0;
+      background:#f5f5f5;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background:#fff;
+      border-radius:8px;
+      overflow:hidden;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* ẢNH CHÍNH */
+    .main-img {
+      width: 100%;
+      height: 600px;
+      object-fit: cover;
+    }
+
+    /* ALBUM */
+    .thumbnail-container {
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+    }
+    .thumbnail-container.active {
+      cursor: grabbing;
+    }
+
+    .thumbnail {
+      flex: 0 0 auto;
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .thumbnail.active { border-color: #ee4d2d; }
+
+    .block {
+      padding: 15px;
+      border-bottom: 10px solid #f5f5f5;
+    }
+
+    .product-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #222;
+      line-height: 1.3;
+    }
+
+
+    /* GIỐNG SHOPEE */
+    .price-area {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .price { font-size: 30px; color:#ee4d2d; font-weight: bold; }
+    .original-price { text-decoration: line-through; color:#888; }
+    .discount {
+      background: #ffe5e0;
+      color: #ee4d2d;
+      padding: 2px 5px;
+      font-size: 12px;
+      border-radius: 4px;
+    }
+    .sold { margin-left: auto; color:#444; font-size: 14px; }
+
+    .badge-ve { background:#ff5722; color:#fff; padding:3px 6px; border-radius:4px; font-size:12px; }
+    .badge-yt { background:#ee4d2d; color:#fff; padding:3px 6px; border-radius:4px; font-size:12px; }
+
+    .ship-block-row { display:flex; align-items:center; gap:10px; }
+    .ship-title { font-size:16px; }
+    .ship-free { color:#009966; font-weight:bold; }
+
+    .info-small { color:#777; font-size:13px; margin-top:4px; }
+
+    .policy-row {
+      display:flex;
+      gap:15px;
+      font-size:14px;
+      color:#444;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ẢNH CHÍNH -->
+  <img id="mainImage" class="main-img" src="" alt="Ảnh sản phẩm">
+
+  <!-- ALBUM THUMBNAIL -->
+  <div id="thumbnailList" class="thumbnail-container"></div>
+
+
+  <!-- VÙNG GIÁ -->
+  <div class="block">
+
+    <!-- Hàng tên sản phẩm -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+
+      <!-- Icon + Tên + Yêu thích -->
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:20px;">🔥</span>
+        <span id="productName" class="product-title"></span>
+        <span class="badge-yt">Yêu thích+</span>
+      </div>
+
+      <!-- Đã bán -->
+      <span id="soldCount" class="sold"></span>
+
+    </div>
+
+    <!-- Hàng giá -->
+    <div class="price-area">
+      <span id="price" class="price"></span>
+      <span id="originalPrice" class="original-price"></span>
+      <span id="discountPercent" class="discount"></span>
+
+      <!-- Rẻ vô địch nằm bên phải -->
+      <span class="badge-ve" style="margin-left:auto;">👍 Rẻ Vô Địch</span>
+    </div>
+
+  </div>
+
+
+  <!-- VẬN CHUYỂN -->
+  <div class="block">
+    <div class="ship-block-row">
+      <span class="ship-title">Nhận vào Ngày Mai 12:00</span>
+    </div>
+    <div class="ship-block-row">
+      <span class="ship-free">Phí ship 0đ</span>
+    </div>
+    <div class="info-small">Tặng Voucher 15.000đ nếu đơn giao trễ.</div>
+  </div>
+
+  <!-- ĐỔI TRẢ -->
+  <div class="block">
+    <div class="policy-row">
+      <span>🔒 Trả hàng miễn phí 15 ngày</span>
+      <span>•</span>
+      <span>Bảo hiểm bảo vệ người tiêu dùng</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // =============================
+  // DỮ LIỆU SẢN PHẨM
+  // =============================
+  const muc_1 = {
+    name: "Gối công thái học",
+    price: 74715,
+    originalPrice: 150000,
+    discountPercent: 50,
+    soldCount: "Đã bán 20k+",
+    images: [
+      "/images/thong-tin-goi-1.webp",
+      "/images/thong-tin-goi-2.webp",
+      "/images/thong-tin-goi-3.webp",
+      "/images/thong-tin-goi-4.webp",
+      "/images/thong-tin-goi-7.webp",
+      "/images/anh-goi-gai-ngua.png",
+      "/images/anh-goi-gai-up.png"
+    ]
+  };
+
+  // =============================
+  // RENDER UI
+  // =============================
+  document.getElementById("mainImage").src = muc_1.images[0];
+  document.getElementById("productName").textContent = muc_1.name;
+  document.getElementById("price").textContent = muc_1.price.toLocaleString() + "đ";
+  document.getElementById("originalPrice").textContent = muc_1.originalPrice.toLocaleString() + "đ";
+  document.getElementById("discountPercent").textContent = `-${muc_1.discountPercent}%`;
+  document.getElementById("soldCount").textContent = muc_1.soldCount;
+
+  const thumbContainer = document.getElementById("thumbnailList");
+
+  muc_1.images.forEach((img, index) => {
+    const el = document.createElement("img");
+    el.src = img;
+    el.className = "thumbnail";
+    if (index === 0) el.classList.add("active");
+
+    el.onclick = () => {
+      document.getElementById("mainImage").src = img;
+      document.querySelectorAll(".thumbnail").forEach(t => t.classList.remove("active"));
+      el.classList.add("active");
+    };
+    thumbContainer.appendChild(el);
+  });
+
+  // =============================
+  // KÉO NGANG THUMBNAIL
+  // =============================
+  const slider = thumbContainer;
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener("mousedown", e => {
+    isDown = true;
+    slider.classList.add("active");
+    startX = e.pageX;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener("mouseleave", () => {
+    isDown = false;
+    slider.classList.remove("active");
+  });
+
+  slider.addEventListener("mouseup", () => {
+    isDown = false;
+    slider.classList.remove("active");
+  });
+
+  slider.addEventListener("mousemove", e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX;
+    slider.scrollLeft = scrollLeft - (x - startX);
+  });
+
+  // TOUCH
+  slider.addEventListener("touchstart", e => {
+    isDown = true;
+    startX = e.touches[0].pageX;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener("touchend", () => { isDown = false; });
+
+  slider.addEventListener("touchmove", e => {
+    if (!isDown) return;
+    const x = e.touches[0].pageX;
+    slider.scrollLeft = scrollLeft - (x - startX);
+  });
+</script>
+
+</body>
+</html>
+
