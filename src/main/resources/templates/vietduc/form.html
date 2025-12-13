@@ -1,3 +1,6 @@
+<!--@todo băt dầu xoa-->
+
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -894,32 +897,47 @@
             color: #fff;
             margin-bottom: 12px;
         }
-
-        /* COUNTDOWN */
+/*///////////////////////////////////////*/
         .form-countdown {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 16px;
+            gap: 12px;
+            margin-bottom: 5px;
         }
 
-        .form-countdown .cd-item {
+        /* Mỗi cột */
+        .cd-item {
+            display: flex;
+            flex-direction: column; /* 🔥 QUAN TRỌNG */
+            align-items: center;
+        }
+
+        /* Ô số */
+        .cd-item strong {
             background: #000;
             color: #fff;
-            width: 54px;
-            padding: 6px 0;
-            text-align: center;
-            border-radius: 4px;
+            width: 56px;
+            height: 48px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 900;
         }
 
-        .form-countdown .cd-item strong {
-            font-size: 18px;
-            display: block;
+        /* Chữ phía dưới */
+        .cd-item span {
+            margin-top: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
         }
 
-        .form-countdown .cd-item span {
-            font-size: 11px;
-        }
+
+        /*////////////////////////*/
+
+
 
         /* INPUT */
         .order-form input {
@@ -1037,12 +1055,7 @@
         }
 
 
-        /*    form đặt hàng chính */
-        /*    .order-main{*/
-        /*        background:#c8a06f;*/
-        /*        padding:18px 14px 22px;*/
-        /*        border-radius:14px;*/
-        /*    }*/
+
 
         .order-main {
             background: #c8a06f;
@@ -1062,19 +1075,118 @@
             box-sizing: border-box;
         }
 
-
-        .btn-submit {
-            width: 100%;
-            padding: 14px;
-            background: #000;
-            color: #fff;
-            border: none;
-            border-radius: 40px;
-            font-size: 18px;
-            font-weight: 900;
-            margin-top: 8px;
+/*////////////////////*/
+        /* KHUNG NGOÀI */
+        .submit-btn-wrap {
+            display: flex;
+            justify-content: center;
+            margin: 18px auto 12px;
+            overflow: hidden;
         }
 
+        .submit-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* ===== NÚT SUBMIT ===== */
+        .submit-btn {
+            position: relative;
+            background: #1f2a40;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 14px 48px;
+            font-size: 18px;
+            font-weight: 800;
+            border-radius: 40px;
+            cursor: pointer;
+            overflow: hidden;
+
+            animation: submitCycle 1.6s infinite;
+        }
+
+        /* NHẤN THẬT */
+        .submit-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* ===== ICON TAY ===== */
+        .submit-hand {
+            position: absolute;
+            right: -46px;
+            bottom: -18px;
+            font-size: 30px;
+            pointer-events: none;
+            transform-origin: center;
+            animation: submitHandCycle 1.6s infinite;
+        }
+
+        /* ===== RIPPLE ===== */
+        .submit-ripple {
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            transform: translateY(-50%) scale(0);
+            opacity: 0;
+            animation: submitRippleCycle 1.6s infinite;
+        }
+
+        /* ================= ANIMATION ĐỒNG BỘ ================= */
+
+        /* NÚT */
+        @keyframes submitCycle {
+            0%,40% { transform: scale(1); }
+            55%    { transform: scale(0.93); }
+            70%    { transform: scale(1.03); }
+            100%   { transform: scale(1); }
+        }
+
+        /* TAY – CHẠM CHÉO LÊN */
+        @keyframes submitHandCycle {
+            0% {
+                transform: translate(0,0) rotate(0deg);
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            55% {
+                transform: translate(-22px,-18px) rotate(-18deg);
+            }
+            75% {
+                transform: translate(-22px,-18px) rotate(-18deg);
+            }
+            100% {
+                transform: translate(0,0) rotate(0deg);
+                opacity: 0;
+            }
+        }
+
+        /* RIPPLE */
+        @keyframes submitRippleCycle {
+            0%,45% {
+                transform: translateY(-50%) scale(0);
+                opacity: 0;
+            }
+            55% {
+                transform: translateY(-50%) scale(0.4);
+                opacity: 1;
+            }
+            75% {
+                transform: translateY(-50%) scale(3);
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /*////////////////////////*/
         .form-note {
             margin-top: 10px;
             text-align: center;
@@ -1332,45 +1444,7 @@
     </ul>
 
 
-    <!--    @todo sửa form đặt hàng này thành như trong ảnh -->
-    <!-- FORM -->
-    <!--    <div class="order-form" id="orderForm">-->
-    <!--        <div class="form-title">ĐĂNG KÝ ĐẶT HÀNG</div>-->
-    <!--        <div class="form-note">Hãy nhập thông tin để đặt hàng</div>-->
 
-    <!--        <form action="/vietduc/submit" method="post">-->
-
-    <!--            <div class="form-group">-->
-    <!--                <input type="text" name="name" placeholder="Họ và tên" required>-->
-    <!--            </div>-->
-
-    <!--            <div class="form-group">-->
-    <!--                <input type="tel" name="phone" placeholder="Số điện thoại" required>-->
-    <!--            </div>-->
-
-    <!--            <div class="form-group">-->
-    <!--                <input type="text" name="address" placeholder="Địa chỉ" required>-->
-    <!--            </div>-->
-
-
-    <!--            <div class="option-group-title">Chọn mua:</div>-->
-
-    <!--            <div class="options-wrapper" id="comboOptions">-->
-    <!--                &lt;!&ndash; Render bằng JS &ndash;&gt;-->
-    <!--            </div>-->
-
-
-    <!--            &lt;!&ndash; input ẩn gửi vào form &ndash;&gt;-->
-    <!--            <input type="hidden" id="selectedCombo" value="">-->
-    <!--            <input type="hidden" id="selectedColor" value="Trắng">-->
-
-    <!--            &lt;!&ndash; hidden fields gửi vào form &ndash;&gt;-->
-    <!--            <input type="hidden" name="combo" id="formCombo">-->
-
-    <!--            <button class="btn-order" type="submit">ĐẶT HÀNG NGAY</button>-->
-
-    <!--        </form>-->
-    <!--    </div>-->
     <div class="order-wrap" id="orderForm">
 
         <div class="order-header">
@@ -1397,24 +1471,27 @@
             <div class="form-title">ĐĂNG KÝ MUA HÀNG</div>
             <div class="form-note">KHUYẾN MÃI KẾT THÚC SAU:</div>
 
-            <div class="form-countdown">
+
+            <div class="form-countdown"id="countdown">
                 <div class="cd-item">
-                    <strong>00</strong>
+                    <strong id="cd-day">00</strong>
                     <span>Ngày</span>
                 </div>
                 <div class="cd-item">
-                    <strong>11</strong>
+                    <strong id="cd-hour">00</strong>
                     <span>Giờ</span>
                 </div>
                 <div class="cd-item">
-                    <strong>38</strong>
+                    <strong id="cd-minute">00</strong>
                     <span>Phút</span>
                 </div>
                 <div class="cd-item">
-                    <strong>04</strong>
+                    <strong id="cd-second">00</strong>
                     <span>Giây</span>
                 </div>
             </div>
+
+
 
             <!-- PHẦN 3: FORM ĐẶT HÀNG -->
             <form class="order-main" action="/vietduc/submit" method="post">
@@ -1443,6 +1520,9 @@
                     <input type="text" name="address">
                 </div>
 
+
+
+
                 <div class="form-field">
                     <div class="field-label">
                         <label>Chọn combo</label>
@@ -1456,9 +1536,16 @@
                 </div>
 
 
-                <button type="submit" class="btn-submit">
-                    ĐẶT HÀNG NGAY
-                </button>
+                <div class="submit-btn-wrap">
+                    <div class="submit-wrap">
+                        <button type="submit" class="submit-btn">
+                            ĐẶT HÀNG NGAY
+                            <span class="submit-ripple"></span>
+                        </button>
+                        <span class="submit-hand">👆</span>
+                    </div>
+                </div>
+
 
                 <div class="form-note">
                     Miễn phí ship – Thanh toán khi nhận hàng
@@ -1843,7 +1930,39 @@
         this.value = this.value.replace(/\D/g, "");
     });
 
+// đếm ngược
+    let countdownSeconds = 12 * 60 * 60; // 12 giờ
 
+    const elDay = document.getElementById("cd-day");
+    const elHour = document.getElementById("cd-hour");
+    const elMinute = document.getElementById("cd-minute");
+    const elSecond = document.getElementById("cd-second");
+
+    function updateCountdown() {
+        if (countdownSeconds <= 0) {
+            elDay.textContent = "00";
+            elHour.textContent = "00";
+            elMinute.textContent = "00";
+            elSecond.textContent = "00";
+            return;
+        }
+
+        const days = Math.floor(countdownSeconds / (24 * 3600));
+        const hours = Math.floor((countdownSeconds % (24 * 3600)) / 3600);
+        const minutes = Math.floor((countdownSeconds % 3600) / 60);
+        const seconds = countdownSeconds % 60;
+
+        elDay.textContent = String(days).padStart(2, "0");
+        elHour.textContent = String(hours).padStart(2, "0");
+        elMinute.textContent = String(minutes).padStart(2, "0");
+        elSecond.textContent = String(seconds).padStart(2, "0");
+
+        countdownSeconds--;
+    }
+
+    // chạy ngay khi load
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 </script>
 
 </body>
