@@ -644,32 +644,30 @@
         /* ================= ICON TAY ================= */
         .hand-pointer {
             position: absolute;
-            left: calc(100% + 40px); /* xuất phát xa */
-            top: 50%;
+            left: calc(100% + 40px);
+            top: 65%; /* ⬅️ xuất phát thấp hơn */
             font-size: 30px;
-            transform: translateY(-50%);
+            transform: translate(0, 0) rotate(30deg);
             pointer-events: none;
-
-            /* 🔥 CÙNG CHU KỲ */
             animation: handCycle 1.6s infinite;
         }
+
 
         /* ================= HIỆU ỨNG TỎA ================= */
         .ripple {
             position: absolute;
             right: 18px;
-            top: 50%;
+            top: 35%; /* ⬅️ chạm góc phải trên */
             width: 10px;
             height: 10px;
             background: rgba(255,255,255,0.8);
             border-radius: 50%;
             transform: translateY(-50%) scale(0);
             opacity: 0;
-
-            /* 🔥 CÙNG CHU KỲ */
             animation: rippleCycle 1.6s infinite;
             pointer-events: none;
         }
+
 
         /* =================================================
            🔁 ANIMATION ĐỒNG BỘ (1 NHỊP DUY NHẤT)
@@ -688,23 +686,25 @@
         /* TAY: ĐI TỪ XA → CHẠM NÚT → RÚT RA */
         @keyframes handCycle {
             0% {
-                transform: translate(0, -50%);
+                transform: translate(0, 0) rotate(-30deg);
                 opacity: 0;
             }
             20% {
                 opacity: 1;
             }
             42% {
-                transform: translate(-60px, -50%); /* ⬅️ CHẠM NHANH */
+                transform: translate(-60px, -25px) rotate(30deg);
+                /* ⬅️ CHÉO LÊN GÓC PHẢI TRÊN */
             }
             58% {
-                transform: translate(-60px, -50%);
+                transform: translate(-60px, -25px) rotate(-30deg);
             }
             100% {
-                transform: translate(0, -50%);
+                transform: translate(0, 0) rotate(-30deg);
                 opacity: 0;
             }
         }
+
 
 
         /* TỎA RA ĐÚNG LÚC TAY CHẠM */
@@ -726,6 +726,70 @@
             }
         }
 
+    /*         CHO VIDEO CHINH */
+        /* ===== VIDEO BLOCK ===== */
+        .video-block {
+            margin: 20px auto;
+            padding: 0 16px;
+            max-width: 600px;
+        }
+
+        .video-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #d84315;
+            margin-bottom: 10px;
+        }
+
+        .video-wrap {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
+
+        .video-wrap video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
+    /*css cho nutý tắt tiếng */
+
+        .video-wrap {
+            position: relative;
+        }
+
+        .video-sound-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(0,0,0,0.55);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.25s ease;
+        }
+
+        .video-sound-btn:active {
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+
+        /* Khi đã bật tiếng → mờ dần */
+        .video-sound-btn.active {
+            opacity: 0;
+            pointer-events: none;
+        }
 
 
     </style>
@@ -880,6 +944,27 @@
     </div>
 
 
+    <!-- VIDEO CÔNG DỤNG -->
+    <div class="video-block">
+<!--        <div class="video-title">-->
+<!--            🎥 Video công dụng thực tế-->
+<!--        </div>-->
+
+        <div class="video-wrap">
+            <video id="mainVideo"
+                   muted
+                   playsinline
+                   controls
+                   preload="metadata">
+            </video>
+
+            <div class="video-sound-btn" id="soundToggle">
+                🔇
+            </div>
+
+
+        </div>
+    </div>
 
 
 
@@ -949,6 +1034,12 @@
             "Mua lẻ - 1 chiếc : 199k miễn ship",
             "Combo 2 chiếc : 350k miễn ship"
         ]
+    };
+
+    const muc_2 = {
+        videos: [
+            "/videos/video-goi-3.mp4"
+        ],
     };
 
     document.title = muc_1.name;
@@ -1085,10 +1176,54 @@
         document.getElementById("orderForm").scrollIntoView({behavior: "smooth"});
     };
 
-        document.getElementById("scrollToFormBtn2").onclick = e => {
+    document.getElementById("scrollToFormBtn2").onclick = e => {
         e.preventDefault();
         document.getElementById("orderForm").scrollIntoView({behavior: "smooth"});
     };
+
+
+    /* ================= VIDEO CÔNG DỤNG – CHUẨN ================= */
+    const video = document.getElementById("mainVideo");
+    const soundBtn = document.getElementById("soundToggle");
+
+    if (muc_2.videos && muc_2.videos.length > 0) {
+        video.src = muc_2.videos[0];
+    }
+
+    /* ===== AUTOPLAY KHI LƯỚT TỚI (MUTED) ===== */
+    let hasPlayed = false;
+
+    const videoObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasPlayed) {
+                video.muted = true;       // 🔇 bắt buộc muted
+                video.volume = 1;
+
+                video.play().then(() => {
+                    hasPlayed = true;     // 👉 chỉ auto-play 1 lần
+                }).catch(err => {
+                    console.log("Autoplay bị chặn:", err);
+                });
+            }
+        });
+    }, {
+        threshold: 0.6
+    });
+
+    videoObserver.observe(video);
+
+    /* ===== KHÁCH TỰ BẬT TIẾNG ===== */
+    soundBtn.addEventListener("click", () => {
+        video.muted = false;
+        video.volume = 1;
+
+        video.play().then(() => {
+            soundBtn.textContent = "🔊";
+            soundBtn.classList.add("active"); // ẩn nút
+        }).catch(err => {
+            console.log("Không bật được tiếng:", err);
+        });
+    });
 
 
 </script>
