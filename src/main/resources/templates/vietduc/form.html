@@ -47,18 +47,18 @@
         .btn-buy {
             background: #ff6a00;
             color: white;
-            padding: 6px 10px;
+            padding: 10px 16px;
             border-radius: 6px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 20px;
             font-weight: 700;
             text-align: center;
-            line-height: 1.1;
+            line-height: 1.3;
         }
 
         .cart-icon {
-            width: 22px;
-            height: 22px;
+            width: 30px;
+            height: 30px;
             fill: white;
             vertical-align: middle;
             margin-right: 6px;
@@ -592,7 +592,7 @@
 
 
         .product-title-center {
-            margin-top: 80px;
+            margin-top: 100px;
             text-align: center;
             font-size: 40px; /* tăng từ 28px lên 34px */
             font-weight: 750; /* đậm hơn (700 → 800) */
@@ -790,6 +790,67 @@
             opacity: 0;
             pointer-events: none;
         }
+    /*cam kết trước form đặt hàng */
+        .commit-list {
+            margin: 12px 0;
+            padding-left: 18px;
+            list-style: disc;
+        }
+
+        .commit-list li {
+            font-size: 20px;          /* size giống ảnh */
+            line-height: 1.6;         /* thoáng, dễ đọc */
+            color: #222;              /* đen xám dịu */
+            font-weight: 400;
+            margin-left: 20px;/* không bold */
+            margin-bottom: 6px;
+            font-family: -apple-system, BlinkMacSystemFont,
+            "Segoe UI", Roboto, Arial, sans-serif;
+        }
+        .commit-list li {
+            font-weight: 500;
+        }
+
+
+
+        /* mục 3 chi tiết  */
+        /* ===== CHI TIẾT SẢN PHẨM (MỤC 3) ===== */
+        .detail-section {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 18px; /* nới lề trái phải cho dễ đọc */
+        }
+
+        .detail-text {
+            font-size: 20px;           /* giống ảnh */
+            line-height: 1.7;            /* thoáng, dễ đọc */
+            color: #222;                 /* đen dịu */
+            margin: 14px 0;
+            text-align: justify;         /* căn đều 2 bên */
+            font-weight: 400;            /* KHÔNG bold */
+            font-family: -apple-system, BlinkMacSystemFont,
+            "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        /* ảnh */
+        .detail-image {
+            width: 100%;
+            border-radius: 10px;
+            margin: 14px 0;
+            display: block;
+        }
+        .detail-text {
+            font-weight: 500;
+        }
+
+
+        /* video */
+        .detail-video {
+            width: 100%;
+            border-radius: 12px;
+            margin: 16px 0;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
 
 
     </style>
@@ -967,10 +1028,24 @@
     </div>
 
 
+    <div id="detailSection" class="detail-section"></div>
 
 
 
 
+
+
+    <ul class="commit-list">
+        <li>Cam kết chất lượng và mẫu mã sản phẩm giống với hình ảnh.</li>
+        <li>Cam kết được đổi trả hàng trong vòng 5 ngày.</li>
+        <li>Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt.</li>
+        <li>Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng.</li>
+    </ul>
+
+
+
+
+<!--    @todo sửa form đặt hàng này thành như trong ảnh -->
     <!-- FORM -->
     <div class="order-form" id="orderForm">
         <div class="form-title">ĐĂNG KÝ ĐẶT HÀNG</div>
@@ -1030,10 +1105,6 @@
             "/images/anh-goi-gai-ngua.png",
             "/images/anh-goi-gai-up.png"
         ],
-        combos: [
-            "Mua lẻ - 1 chiếc : 199k miễn ship",
-            "Combo 2 chiếc : 350k miễn ship"
-        ]
     };
 
     const muc_2 = {
@@ -1041,6 +1112,41 @@
             "/videos/video-goi-3.mp4"
         ],
     };
+
+
+    // muc 3 thông tin chi tiết
+    const muc_3 = {
+        blocks: [
+            {
+                type: "text",
+                content: "Gối massage công nghệ Nhật Bản giúp giảm đau mỏi cổ vai gáy, thư giãn cơ bắp sau ngày dài làm việc."
+            },
+            {
+                type: "image",
+                src: "/images/thong-tin-goi-1.webp"
+            },
+            {
+                type: "video",
+                src: "/videos/video-goi-3.mp4"
+            },
+            {
+                type: "text",
+                content: "Thiết kế công thái học ôm sát vùng cổ, phù hợp cho mọi đối tượng từ dân văn phòng đến người lớn tuổi."
+            },
+            {
+                type: "image",
+                src: "/images/thong-tin-goi-2.webp"
+            }
+        ]
+    };
+
+    const muc_4 = {
+        combos: [
+            "Mua lẻ - 1 chiếc : 199k miễn ship",
+            "Combo 2 chiếc : 350k miễn ship"
+        ]
+    };
+
 
     document.title = muc_1.name;
 
@@ -1147,7 +1253,7 @@
     /* ====================== COMBO OPTIONS ====================== */
     const comboWrapper = document.getElementById("comboOptions");
 
-    muc_1.combos.forEach((text, index) => {
+    muc_4.combos.forEach((text, index) => {
         const el = document.createElement("div");
         el.className = "option-item" + (index === 0 ? " active" : "");
         el.textContent = text;
@@ -1166,8 +1272,8 @@
     });
 
     /* Set mặc định */
-    document.getElementById("selectedCombo").value = muc_1.combos[0];
-    document.getElementById("formCombo").value = muc_1.combos[0];
+    document.getElementById("selectedCombo").value = muc_4.combos[0];
+    document.getElementById("formCombo").value = muc_4.combos[0];
 
 
     /* ====================== CUỘN TỚI FORM KHI NHẤN BUY ====================== */
@@ -1223,6 +1329,38 @@
         }).catch(err => {
             console.log("Không bật được tiếng:", err);
         });
+    });
+
+
+
+    /* ====================== RENDER MỤC 3 ====================== */
+    const detailContainer = document.getElementById("detailSection");
+
+    muc_3.blocks.forEach(block => {
+        if (block.type === "text") {
+            const p = document.createElement("p");
+            p.className = "detail-text";
+            p.textContent = block.content;
+            detailContainer.appendChild(p);
+        }
+
+        if (block.type === "image") {
+            const img = document.createElement("img");
+            img.className = "detail-image";
+            img.src = block.src;
+            img.loading = "lazy";
+            detailContainer.appendChild(img);
+        }
+
+        if (block.type === "video") {
+            const video = document.createElement("video");
+            video.className = "detail-video";
+            video.src = block.src;
+            video.controls = true;
+            video.playsInline = true;
+            video.preload = "metadata";
+            detailContainer.appendChild(video);
+        }
     });
 
 
