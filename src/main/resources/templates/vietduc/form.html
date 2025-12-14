@@ -1896,6 +1896,15 @@
         }
 
 
+
+        .detail-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #222;
+        }
+
+
     </style>
 </head>
 
@@ -1937,7 +1946,7 @@
 
     <div class="price-right">
         <div id="salePrice" class="sale-price"></div>
-        <div class="ship">+ MIỄN PHÍ SHIP</div>
+        <div class="ship">MIỄN PHÍ SHIP KHI MUA TỪ 2 GỐI</div>
     </div>
 </div>
 
@@ -2050,9 +2059,9 @@
 
     <!-- VIDEO CÔNG DỤNG -->
     <div class="video-block">
-        <!--        <div class="video-title">-->
-        <!--            🎥 Video công dụng thực tế-->
-        <!--        </div>-->
+<!--                <div class="video-title">-->
+<!--                    🎥 Video thực tế-->
+<!--                </div>-->
 
         <div class="video-wrap">
             <video id="mainVideo"
@@ -2071,7 +2080,12 @@
     </div>
 
 
-    <div id="detailSection" class="detail-section"></div>
+<!--    <div id="detailSection" class="detail-section"></div>-->
+
+    <div id="detailSection" class="detail-section">
+        <h1 class="detail-title">Giới thiệu sản phẩm</h1>
+    </div>
+
 
 
     <ul class="commit-list">
@@ -2345,62 +2359,145 @@
     const muc_1 = {
         name: "GỐI CÔNG THÁI HỌC",
         detail: "Gối massage công nghệ Nhật Bản, hỗ trợ đau mỏi giảm căng thẳng",
-        price: 199000,
+        price: 189000,
         originalPrice: 400000,
         discountPercent: 50,
         soldCount: "Đã bán 20k+",
         images: [
+            "/images/anh-goi-gai-up.png",
             "/images/thong-tin-goi-1.webp",
-            "/images/thong-tin-goi-2.webp",
-            "/images/thong-tin-goi-3.webp",
-            "/images/thong-tin-goi-4.webp",
-            "/images/thong-tin-goi-7.webp",
+            "/images/anh-goi-can.jpg",
             "/images/anh-goi-gai-ngua.png",
-            "/images/anh-goi-gai-up.png"
+            "/images/thong-tin-goi-8.webp",
+            "/images/anh-can-goi-1.jpg",
         ],
     };
     // VIDEO CHỨC NĂNG CHÍNH NGAY SAU ẢNH CHÍNH
     const muc_2 = {
         videos: [
-            "/videos/video-goi-3.mp4"
+            "/videos/video-thuc-te-xin.mp4"
         ],
     };
     // PHẦN CHI TIẾT SẢN PHẨM
     const muc_3 = {
         blocks: [
+            //
             {
                 type: "text",
-                content: "Gối massage công nghệ Nhật Bản giúp giảm đau mỏi cổ vai gáy, thư giãn cơ bắp sau ngày dài làm việc."
+                content: "Gối Công Thái Học Massage là sản phẩm hỗ trợ chăm sóc giấc ngủ và thư giãn cổ vai gáy, phù hợp cho người thường xuyên đau mỏi, ngủ không sâu giấc."
             },
             {
                 type: "image",
                 src: "/images/thong-tin-goi-1.webp"
             },
-            {
-                type: "video",
-                src: "/videos/video-goi-3.mp4"
-            },
+            //
             {
                 type: "text",
-                content: "Thiết kế công thái học ôm sát vùng cổ, phù hợp cho mọi đối tượng từ dân văn phòng đến người lớn tuổi."
+                content: "Cotton cao cấp với cấu trúc sợi đàn hồi, giúp tăng độ đàn hồi, giữ được nhiều không khí bên trong, tạo cảm giác êm ái khi sử dụng và giúp gối luôn giữ form, hạn chế xẹp lún khi nằm lâu."
             },
             {
                 type: "image",
                 src: "/images/thong-tin-goi-2.webp"
-            }
+            },
+            {
+                type: "image",
+                src: "/images/thong-tin-goi-7.webp"
+            },
+            //
+            {
+                type: "text",
+                content: "Thiết kế công thái học 3D phân vùng rõ ràng.\n" +
+                    "👉 Vùng thấp (giữa gối): phù hợp tư thế nằm ngửa, giúp giữ cổ thẳng và thoải mái.\n" +
+                    "👉 Vùng cao (hai bên): phù hợp tư thế nằm nghiêng, ôm sát cổ như cánh bướm, nâng đỡ tốt khi xoay trở.\n" +
+                    "Nhờ phân vùng rõ ràng, gối giúp nâng đỡ đúng tư thế và mang lại cảm giác ngủ thoải mái hơn."
+            },
+            {
+                type: "image",
+                src: "/images/thong-tin-goi-5.webp"
+            },
+            //
+            {
+                type: "text",
+                content: "Vỏ gối dệt kim cao cấp với bề mặt mịn đẹp, đường dệt chắc chắn, vừa tăng tính thẩm mỹ vừa mang lại cảm giác mềm mại, thoáng khí và thoải mái khi tiếp xúc với da."
+            },
+            {
+                type: "image",
+                src: "/images/thong-tin-goi-3.webp"
+            },
+            //
+            {
+                type: "text",
+                content: "Bề mặt gối được xử lý kháng khuẩn, giúp loại bỏ nấm mốc và vi khuẩn tích tụ trong quá trình sử dụng, bảo vệ làn da."
+            },
+            {
+                type: "image",
+                src: "/images/thong-tin-goi-4.webp"
+            },
+            {
+                type: "text",
+                content: "Nhờ bề mặt kháng khuẩn kết hợp chất liệu thoáng khí, gối giúp người dùng ngủ thoải mái hơn, hạn chế bí nóng và cảm giác khó chịu khi nằm lâu."
+            },
+            {
+                type: "image",
+                src: "/images/thong-tin-goi-6.webp"
+            },
+
+            // tổ hợp thông tin
+            {
+                type: "text",
+                content: "Tổng hợp ưu điểm vượt trội: đàn hồi cao, êm ái, thoáng khí và an toàn hơn hẳn gối thường, cho giấc ngủ thoải mái và bền lâu."
+            },
+            {
+                type: "image",
+                src: "/images/logo-to-hop-thong-tin.png"
+            },
+            //chứng nhận
+            {
+                type: "text",
+                content: "📌 Thông số kỹ thuật và hướng dẫn bảo quản, sử dụng gối."
+            },
+            {
+                type: "image",
+                src: "/images/cach-dung-goi.png"
+            },
+
+
+
+
+
+            // {
+            //     type: "text",
+            //     content: "Gối massage công nghệ Nhật Bản giúp giảm đau mỏi cổ vai gáy, thư giãn cơ bắp sau ngày dài làm việc."
+            // },
+            // {
+            //     type: "image",
+            //     src: "/images/thong-tin-goi-1.webp"
+            // },
+            // {
+            //     type: "video",
+            //     src: "/videos/video-goi-3.mp4"
+            // },
+            // {
+            //     type: "text",
+            //     content: "Thiết kế công thái học ôm sát vùng cổ, phù hợp cho mọi đối tượng từ dân văn phòng đến người lớn tuổi."
+            // },
+            // {
+            //     type: "image",
+            //     src: "/images/thong-tin-goi-2.webp"
+            // }
         ]
     };
     // COMBO SẢN PHẨM
     const muc_4 = {
         combos: [
-            "Mua lẻ - 1 chiếc : 199k miễn ship",
-            "Combo 2 chiếc : 350k miễn ship"
+            "Mua lẻ - 1 chiếc : 189k + 30k ship",
+            " Combo 2 chiếc : 350k  miễn ship"
         ]
     };
     // ĐÁNH GIÁ
     const muc_5 = [
         {
-            avatar: "/images/thong-tin-goi-1.webp",
+            avatar: "/images/dung.jpg",
             name: "Nguyễn Dung",
             stars: 5,
             content: "Sản phẩm rất tốt, giá thành rẻ hơn shop khác. Shop tư vấn nhiệt tình, mình mua 2 cái về tặng bố 1 cái, cả nhà ai cũng ưng hết nấc.",
@@ -2409,13 +2506,31 @@
             like: 12
         },
         {
-            avatar: "https://i.pravatar.cc/100?img=2",
+            avatar: "/images/minh.jpg",
             name: "Trần Minh",
             stars: 5,
             content: "Chất lượng sản phẩm tuyệt vời, đóng gói chắc chắn, giao hàng nhanh.",
             pros: ["tc1", "tc5"],
             time: "14:12 18-05-2024",
             like: 5
+        },
+        {
+            avatar: "/images/thao.png",
+            name: "Lê Thảo",
+            stars: 5,
+            content: "Gối nằm rất êm, không bị xẹp như mấy loại mình từng mua trước đây. Ngủ dậy không còn mỏi cổ, cảm giác dễ chịu hẳn.",
+            pros: ["tc1", "tc2"],
+            time: "21:05 25-05-2024",
+            like: 9
+        },
+        {
+            avatar: "/images/hung.jpg",
+            name: "Phạm Hùng",
+            stars: 5,
+            content: "Nhận hàng thấy đóng gói rất kỹ, gối đúng mô tả. Giá hợp lý so với chất lượng, sẽ ủng hộ shop thêm.",
+            pros: ["tc2", "tc3", "tc5"],
+            time: "10:18 30-05-2024",
+            like: 7
         }
     ];
     // TIÊU CHÍ ĐÁNH GIÁ
