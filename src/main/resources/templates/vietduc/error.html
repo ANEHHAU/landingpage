@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đã xảy ra lỗi</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .error-box {
+            background: #fff;
+            max-width: 420px;
+            width: 100%;
+            padding: 28px 22px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .error-icon {
+            font-size: 54px;
+            margin-bottom: 8px;
+        }
+
+        .error-title {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #d32f2f;
+        }
+
+        .error-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        .error-detail {
+            margin-top: 14px;
+            font-size: 14px;
+            color: #777;
+            word-break: break-word;
+        }
+
+        .error-btn {
+            margin-top: 22px;
+            display: inline-block;
+            width: 100%;
+            text-decoration: none;
+            background: #2a7cff;
+            color: #fff;
+            padding: 14px 0;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+        }
+
+        .error-btn:hover {
+            background: #1f66d1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="error-page">
+    <div class="error-box">
+
+        <div class="error-icon">⚠️</div>
+
+        <div class="error-title">Có lỗi xảy ra</div>
+
+        <div class="error-text">
+            Rất tiếc, hệ thống không thể xử lý yêu cầu của bạn lúc này.<br>
+            Vui lòng thử lại sau hoặc liên hệ để được hỗ trợ.
+        </div>
+
+        <!-- Hiện chi tiết lỗi nếu controller có truyền -->
+        <div class="error-detail" th:if="${error}">
+            Chi tiết: <span th:text="${error}"></span>
+        </div>
+
+        <a href="/" class="error-btn">
+            Quay về trang chủ
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>

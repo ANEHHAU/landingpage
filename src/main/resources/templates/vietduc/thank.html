@@ -1,57 +1,137 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Cảm ơn đã đặt hàng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cảm ơn bạn đã đặt hàng</title>
 
     <style>
         body {
-            font-family: "Segoe UI", sans-serif;
-            background: linear-gradient(145deg, #f8f9fa, #ffffff);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
         }
+
+        .thankyou-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
         .thankyou-box {
+            background: #ffffff;
+            max-width: 420px;
+            width: 100%;
+            padding: 28px 22px;
+            border-radius: 14px;
             text-align: center;
-            background: #fff;
-            padding: 30px 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 400px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
-        h2 {
-            color: #0c9;
-            margin-bottom: 10px;
+
+        .thankyou-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* khoảng cách icon – chữ */
+            margin-bottom: 14px;
         }
-        p {
-            color: #555;
+
+
+        /*.thankyou-icon {*/
+        /*    font-size: 48px;*/
+        /*    margin-bottom: 12px;*/
+        /*}*/
+
+        .thankyou-icon {
+            font-size: 32px;
+            line-height: 1;
+        }
+
+        /*.thankyou-title {*/
+        /*    font-size: 30px;*/
+        /*    font-weight: 800;*/
+        /*    margin-bottom: 14px;*/
+        /*}*/
+        .thankyou-title {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+
+
+        .thankyou-text {
             font-size: 16px;
+            line-height: 1.7;
+            color: #444;
         }
-        a {
+
+        .thankyou-text strong {
+            color: #000;
+        }
+
+        .thankyou-note {
+            margin-top: 16px;
+            font-size: 15px;
+            color: #666;
+        }
+
+        .thankyou-highlight {
+            margin-top: 18px;
+            padding: 12px;
+            background: #f0f8ff;
+            border-left: 4px solid #2a7cff;
+            font-size: 15px;
+            border-radius: 6px;
+        }
+
+        .thankyou-btn {
+            margin-top: 22px;
             display: inline-block;
-            margin-top: 20px;
+            width: 100%;
             text-decoration: none;
-            background: #0c9;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: 0.2s;
+            background: #2a7cff;
+            color: #fff;
+            padding: 14px 0;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
         }
-        a:hover {
-            background: #00bfa5;
+
+        .thankyou-btn:hover {
+            background: #1f66d1;
         }
     </style>
 </head>
 <body>
-<div class="thankyou-box">
-    <h2>Cảm ơn bạn đã đặt hàng!</h2>
-    <p>Chúng tôi sẽ liên hệ trong thời gian sớm nhất.</p>
-    <a th:href="@{/}">Quay lại trang chủ</a>
+
+<div class="thankyou-page">
+    <div class="thankyou-box">
+
+        <div class="thankyou-header">
+            <div class="thankyou-icon">✅</div>
+            <div class="thankyou-title">Đặt đơn thành công!</div>
+        </div>
+
+        <div class="thankyou-text">
+            <strong>Gia dụng Việt Đức</strong> đã nhận được thông tin đặt hàng của bạn.
+            Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất để xác nhận đơn hàng.
+        </div>
+
+        <div class="thankyou-highlight">
+            Sau khi xác nhận thông tin chính xác,
+            <strong>bạn sẽ nhận được hàng sau 3 – 5 ngày làm việc.</strong>.
+        </div>
+
+        <div class="thankyou-note">
+            📞 Vui lòng để ý điện thoại để xác nhận đơn hàng!
+        </div>
+
+
+    </div>
 </div>
+
 </body>
 </html>
