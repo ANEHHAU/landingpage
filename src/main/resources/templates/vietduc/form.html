@@ -49,18 +49,19 @@
         .btn-buy {
             background: #ff6a00;
             color: white;
-            padding: 10px 16px;
+            padding: 7px 13px;
             border-radius: 6px;
             text-decoration: none;
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 650;
             text-align: center;
             line-height: 1.3;
+            margin-right: 14px;
         }
 
         .cart-icon {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             fill: white;
             vertical-align: middle;
             margin-right: 6px;
@@ -70,19 +71,37 @@
         .product-title {
             font-size: 22px;
             font-weight: 700;
+            color: #ff7a45;
+            font-style: italic;
 
-            color: #ff7a45; /* cam nhạt, nhìn mềm */
-            font-style: italic; /* cong nhẹ cho chữ */
+            text-align: center;
+            line-height: 1.4;
 
-            text-align: center; /* căn giữa chuẩn, không lệch */
-            line-height: 1.45;
+            width: 100%;                 /* ⬅ ép full ngang */
+            max-width: 450px;
+            margin: 0 auto;
 
-            max-width: 450px; /* khống chế chiều rộng để tự xuống dòng đẹp */
-            margin: 0 auto; /* căn giữa cả khối */
-
-            padding: 0 20px; /* cách lề trái phải */
+            padding: 0 12px;             /* giảm padding mobile-friendly */
+            box-sizing: border-box;      /* ⬅ QUAN TRỌNG: chống lệch */
             display: block;
         }
+
+        /*.product-title {*/
+        /*    font-size: 22px;*/
+        /*    font-weight: 700;*/
+
+        /*    color: #ff7a45; !* cam nhạt, nhìn mềm *!*/
+        /*    font-style: italic; !* cong nhẹ cho chữ *!*/
+
+        /*    text-align: center; !* căn giữa chuẩn, không lệch *!*/
+        /*    line-height: 1.45;*/
+
+        /*    max-width: 450px; !* khống chế chiều rộng để tự xuống dòng đẹp *!*/
+        /*    margin: 0 auto; !* căn giữa cả khối *!*/
+
+        /*    padding: 0 20px; !* cách lề trái phải *!*/
+        /*    display: block;*/
+        /*}*/
 
 
         body {
@@ -345,7 +364,7 @@
 
         /* Giá gốc */
         .old-price {
-            font-size: 26px; /* TO HƠN */
+            font-size: 24px; /* TO HƠN */
             font-weight: 700;
             font-style: italic; /* NGHIÊNG */
             color: #d32f2f;
@@ -359,209 +378,230 @@
 
         /* Giá sale */
         .sale-price {
-            font-size: 30px; /* TO HƠN NHIỀU */
-            font-weight: 800;
+            font-size: 25px; /* TO HƠN NHIỀU */
+            font-weight: 750;
             font-style: italic;
         }
 
         /* Ship */
         .ship {
-            font-size: 17px;
+            font-size: 18px;
             font-style: italic;
             font-weight: 700;
+            white-space: nowrap;
+            margin-top: 13px;
         }
 
 
         /* ==== BLOCK THÔNG TIN GIỐNG ẢNH ==== */
-        .info-box {
-            background: #fff;
-            padding: 10px 5px;
-            margin-top: 10px;
-        }
-
-        /* dòng 1 */
         .line1 {
             display: flex;
+            justify-content: center;    /* ⬅ căn giữa cả cụm */
             align-items: center;
+            gap: 12px;                  /* khoảng cách giữa 2 chữ */
             width: 100%;
         }
 
-        .left, .right {
-            width: 25%; /* 2 cột hai bên bằng nhau */
-            display: flex;
-            align-items: center;
-        }
-
-        .center {
-            width: 50%; /* cột giữa */
-            display: flex;
-            justify-content: center; /* căn giữa tuyệt đối */
-        }
-
-        /* Yêu thích */
+        /* Badge */
         .badge-like {
             background: #ff6b4a;
             color: #fff;
-            padding: 7px 16px; /* to hơn một chút */
+            padding: 5px 14px;
             border-radius: 5px;
-            font-size: 16px; /* tăng size */
+            font-size: 14px;            /* TO như cũ */
             font-weight: 700;
-            margin-left: 20px;
+            white-space: nowrap;
+            margin-top: 7px;
         }
-
 
         /* Bảo hành */
         .warranty-text {
-            font-size: 24px;
+            font-size: 23px;            /* TO như cũ */
             font-weight: 700;
-            text-align: center;
+            white-space: nowrap;
+            margin-top: 7px;
         }
 
-
+        /*////////////////////////////*/
         /* dòng 2 */
         .line2 {
-            margin-top: 8px;
+            margin-top: 10px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            font-size: 22px; /* TO HƠN NHIỀU */
+            gap: 14px;                 /* khoảng trống giữa các cụm */
+            width: 100%;
         }
 
-        .col-rate, .col-vote, .col-sold {
-            width: 33%;
+        /* 3 cụm */
+        .col-rate,
+        .col-vote,
+        .col-sold {
+            flex: 1;
             display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        /* Trái – Giữa – Phải */
+        .col-rate {
+            justify-content: flex-start;
+            padding-left: 8px;
+        }
+
+        .col-vote {
             justify-content: center;
-            align-items: center;
-            gap: 6px;
         }
 
-        /* Số điểm 4.8 – TO */
+        .col-sold {
+            justify-content: flex-end;
+            padding-right: 8px;
+        }
+
+        /* GIỮ NGUYÊN MÀU – CHỈ ĐỊNH SIZE (đang ổn) */
         .rating-score {
-            color: #d4281c;
-            font-size: 28px; /* TO RÕ */
+            font-size: 23px;
             font-weight: 600;
+            color: #f6a700;
         }
 
-        /* SAO – PHẢI TO HƠN SỐ */
         .rating-stars {
-            color: #ff1d1d;
-            font-size: 26px; /* TO HƠN 4.8 */
+            font-size: 21px;
             line-height: 1;
+            color: #f6a700;
         }
 
-        /* Lượt đánh giá */
         .rating-count {
-            font-size: 24px; /* to rõ */
+            font-size: 19px;
             font-weight: 500;
         }
 
-        /* đã bán */
         .sold-count {
-            font-size: 24px; /* to rõ */
+            font-size: 19px;
             font-weight: 500;
         }
+
 
         /*ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp*/
-
-        /* Khung giá */
-        /* Khung giá */
         .price-box2 {
             margin-top: 10px;
             display: flex;
             align-items: center;
             background: #e8e8e8;
-            padding: 12px 20px;
-            border-radius: 4px;
-            gap: 20px;
+            padding: 12px 14px;
+            border-radius: 6px;
+            gap: 14px;
             width: 100%;
+            box-sizing: border-box;
         }
 
-        /* Cột bên trái (Giá gốc) */
+        /* CỘT TRÁI */
         .col-left {
+            flex: 0 0 26%;
+        }
+
+        .col-left .label {
+            font-size: 18px;
+            font-weight: 700;
+            color: #222; /* GIÁ GỐC MÀU ĐEN */
+            margin-bottom: 2px;
+        }
+
+        /* GIÁ GỐC */
+        .old-price2 {
+            display: inline-block;   /* ⬅ không cho chiếm full dòng */
+            white-space: nowrap;
+            align-items: baseline;
+            gap: 4px;
+            color: #e3562a;
+            font-style: italic;
+            font-weight: 700;
+            text-decoration: line-through;
+        }
+
+        .old-price2 .num {
+            font-size: 18px;
+        }
+
+        .old-price2 .vnd {
+            font-size: 13px;
+        }
+
+
+
+
+        /* CỘT GIỮA */
+        .col-mid {
+            flex: 1;
             display: flex;
             flex-direction: column;
-        }
-
-        /* Cột giữa — CHỈ CẦN SỬA CÁI NÀY */
-        .col-mid {
-            display: flex;
-            flex-direction: row; /* >>> ĐỂ 2 THẰNG NẰM CHUNG 1 DÒNG */
-            align-items: baseline;
-            gap: 8px;
-        }
-
-        /* Cột giảm % */
-        .col-right {
-            display: flex;
-            align-items: center;
-            margin-left: auto !important;
-            margin-right: 35px;
-        }
-
-        /* Giá gốc */
-        #oldPrice2 {
-            color: #e3562a !important;
+            align-items: center;      /* ⬅ CĂN GIỮA NGANG */
+            text-align: center;       /* ⬅ CĂN GIỮA CHỮ */
             font-size: 20px !important;
-            font-style: italic !important;
-            text-decoration: line-through !important;
-            font-weight: 700 !important;
         }
 
-        /* “Chỉ còn” */
-        .col-mid .label {
-            font-size: 22px;
+        .mid-label {
+            font-size: 40px;
             font-weight: 700;
+            color: #333;
+            margin-bottom: 2px;
         }
 
-        /* Giá sau giảm */
+        /* GIÁ KHUYẾN MÃI */
         .sale-price2 {
-            font-size: 28px !important;
+            display:  inline-flex;
+            align-items: baseline;
+            gap: 6px;
+            color: #e6452d;
             font-weight: 900;
-            color: #e6452d !important;
+            font-size: 24px !important;
         }
 
+        .sale-price2 .num {
+            font-size: 40px;
+        }
 
-        .label {
+        .sale-price2 .vnd {
             font-size: 14px;
-            font-weight: 700;
-            color: #333;
         }
 
-        .labelFirst {
-            font-size: 24px;
-            font-weight: 700;
-            color: #333;
-            font-style: italic;
+
+
+
+
+
+
+        /* CỘT PHẢI */
+        .col-right {
+            flex-shrink: 0;
         }
 
-        .old-price2 {
-            text-decoration: line-through;
-            font-style: italic;
-            color: #777;
-            font-size: 15px;
-            margin-top: 2px;
-        }
-
-        .sale-price2 {
-            color: #d4281c;
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        /* Nút Giảm % */
         .discount-box {
-            background: #ff6b4a; /* màu đỏ nhạt đẹp hơn */
+            background: #ff6b4a;
             color: #fff;
-            font-size: 16px; /* bằng “Yêu thích” */
+            font-size: 15px;
             font-weight: 700;
-            padding: 7px 16px;
-            border-radius: 5px;
+            padding: 7px 12px;
+            border-radius: 6px;
             white-space: nowrap;
-            margin-left: auto; /* căn chắc chắn sang phải */
-            margin-right: 5px; /* nếu muốn sát biên */
+        }
+
+        /* MOBILE */
+        @media (max-width: 480px) {
+            .sale-price2 .num {
+                font-size: 24px;
+            }
+            .mid-label {
+                font-size: 18px;
+            }
+            .discount-box {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
         }
 
 
+
+        /*/////////////////////////////////////////////////////////////////*/
         /* 3 tiện ích */
         .benefit-row {
             margin-top: 10px;
@@ -569,72 +609,49 @@
             width: 100%;
         }
 
+        /* mỗi cột chia đều */
         .benefit-col {
-            width: 33.3333%;
+            flex: 1;
             display: flex;
-            justify-content: center; /* giữa ngang trong cột */
+            justify-content: center;
         }
 
+        /* ICON TRÁI – TEXT PHẢI */
         .benefit-item {
             display: flex;
-            align-items: center; /* icon + text giữa theo chiều cao */
-            justify-content: center;
+            align-items: center;
             gap: 8px;
-            text-align: center; /* 🔥 CÁI QUAN TRỌNG */
+            max-width: 150px;          /* ⬅ đủ để text 2 dòng */
         }
 
+        /* icon */
         .benefit-icon {
-            font-size: 35px;
+            font-size: 31px;
             line-height: 1;
+            flex-shrink: 0;            /* ⛔ icon không bị ép */
         }
 
+        /* text */
         .benefit-text {
-            font-size: 15px;
+            font-size: 13px;
+            line-height: 1.3;
+            text-align: left;
+
+            word-break: keep-all;      /* ⬅ không bẻ từ lung tung */
+        }
+
+
+
+        .product-title-center {
+            margin-top: 100px;
+            text-align: center;
+            font-size: 37px; /* tăng từ 28px lên 34px */
+            font-weight: 750; /* đậm hơn (700 → 800) */
+            font-style: italic; /* thêm nghiêng */
+            color: #333;
+            padding: 10px 20px;
             line-height: 1.3;
         }
-
-        /*@todo*/
-        .product-title-center {
-            margin-top: 60px;            /* giảm cho gọn trên mobile */
-            text-align: center;
-            font-size: 34px;             /* desktop */
-            font-weight: 700;
-            font-style: italic;
-            color: #333;
-            padding: 8px 16px;
-            line-height: 1.25;
-            word-break: break-word;      /* chống tràn chữ */
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .product-title-center {
-                font-size: 22px;         /* bé lại cho điện thoại */
-                margin-top: 40px;
-                line-height: 1.35;
-                padding: 6px 12px;
-            }
-        }
-
-        /* Mobile nhỏ (iPhone SE, Android nhỏ) */
-        @media (max-width: 480px) {
-            .product-title-center {
-                font-size: 20px;
-                font-weight: 650;        /* nhẹ hơn để đỡ bè chữ */
-                font-style: normal;      /* bỏ nghiêng để không bị xấu dòng */
-            }
-        }
-
-        /*.product-title-center {*/
-        /*    margin-top: 100px;*/
-        /*    text-align: center;*/
-        /*    font-size: 40px; !* tăng từ 28px lên 34px *!*/
-        /*    font-weight: 750; !* đậm hơn (700 → 800) *!*/
-        /*    font-style: italic; !* thêm nghiêng *!*/
-        /*    color: #333;*/
-        /*    padding: 10px 20px;*/
-        /*    line-height: 1.3;*/
-        /*}*/
 
 
         /*    nút mua ngay dưới thông tin 3*/
@@ -655,6 +672,7 @@
 
         /* ================= NÚT MUA ================= */
         .buy-btn {
+            margin-top: 10px;
             position: relative;
             background: #ee4d2d;
             color: #fff;
@@ -873,7 +891,9 @@
             color: #222; /* đen dịu */
             margin: 14px 0;
             text-align: justify; /* căn đều 2 bên */
+            text-indent: 1em;
             font-weight: 400; /* KHÔNG bold */
+            white-space: pre-line;
             font-family: -apple-system, BlinkMacSystemFont,
             "Segoe UI", Roboto, Arial, sans-serif;
         }
@@ -886,9 +906,7 @@
             display: block;
         }
 
-        .detail-text {
-            font-weight: 500;
-        }
+
 
 
         /* video */
@@ -1019,28 +1037,35 @@
             margin-bottom: 20px;
         }
 
+        /*.thank-title {*/
+        /*    font-size: 30px;*/
+        /*    font-weight: 900;*/
+        /*    color: #ffb26b;*/
+        /*    animation: thankBreath 0.9s ease-in-out infinite;*/
+        /*}*/
+
         .thank-title {
-            font-size: 30px;
+            display: flex;               /* ⬅ QUAN TRỌNG */
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+            font-size: 25px;
             font-weight: 900;
             color: #ffb26b;
+
+            white-space: nowrap;         /* ⬅ CẤM XUỐNG DÒNG */
+            text-align: center;
+
             animation: thankBreath 0.9s ease-in-out infinite;
         }
 
 
-        /*.thank-title {*/
-        /*    display: flex;*/
-        /*    align-items: center;*/
-        /*    justify-content: center;*/
-        /*    gap: 6px;*/
 
-        /*    font-size: 28px;*/
-        /*    font-weight: 900;*/
-        /*    color: #ffb26b;*/
-        /*}*/
 
         /* ICON HOT */
         .hot-icon {
-            width: 60px;
+            width: 45px;
             height: auto;
             animation: hotBlink 0.9s infinite;
         }
@@ -1096,13 +1121,14 @@
 
         .thank-sub {
             margin-top: 8px;
-            font-size: 21px;
+            font-size: 18px;
             color: #fff;
             line-height: 1.5;
         }
 
 
         .combo-title {
+            margin-left: 22px;
             text-align: center;
             margin-bottom: 12px;
         }
@@ -1411,7 +1437,7 @@
         .location-row select.error {
             border-color: #e53935;
         }
-
+        /*todo*/
         /*css cho combo chỉ hiển thị */
         /* ===== ITEM COMBO ===== */
         .combo-item-view {
@@ -1430,6 +1456,12 @@
 
             background: #fff;
             transition: all 0.2s ease;
+
+
+            white-space: nowrap;
+            overflow: hidden;
+
+            border: 1px solid #ddd;
         }
 
         /* hover nhẹ */
@@ -1459,6 +1491,7 @@
             line-height: 1.3;
             display: flex;
             align-items: center; /* căn giữa theo vòng */
+            font-size: 17px;
         }
 
 
@@ -1493,52 +1526,72 @@
             font-weight: 900;
             margin-bottom: 16px;
         }
-
-        /* TỔNG QUAN */
+        /**/
+        /*///////////////////////////////////!* TỔNG QUAN *!*/
         .review-summary {
             border: 2px solid #ff9f43;
             background: #fff6ee;
             padding: 14px;
             border-radius: 8px;
             display: flex;
+            align-items: center;
             gap: 16px;
             margin-bottom: 20px;
         }
 
         .summary-left {
-            min-width: 120px;
+            min-width: 135px;
+            text-align: center;
         }
 
         .summary-score {
-            font-size: 26px;
+            font-size: 29px;
             font-weight: 900;
             color: #ff5722;
+            line-height: 1;
         }
 
         .summary-score span {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
         }
 
         .summary-stars {
             color: #ffb400;
-            font-size: 30px;
+            font-size: 24px;   /* 🔥 GIẢM BỚT ĐỂ KHÔNG ĐÈ */
+            line-height: 1.2;
+            margin-top: 6px;
         }
 
-        /* TAG */
+
+
         .summary-tags {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
             align-items: center;
+            gap: 8px;
+
+            flex-wrap: nowrap;        /* ❌ KHÔNG XUỐNG DÒNG */
+            overflow-x: auto;         /* 👉 mobile kéo ngang */
+            -webkit-overflow-scrolling: touch;
+
+            padding-bottom: 4px;
         }
 
+
+
+
         .tag {
-            border: 1px solid #ccc;
-            padding: 6px 10px;
-            border-radius: 4px;
-            font-size: 14px;
+            border: 1.5px solid #ccc;
+            padding: 8px 14px;
+            border-radius: 6px;
+
+            font-size: 15px;
+            font-weight: 600;
+            white-space: nowrap;      /* 🔥 QUAN TRỌNG */
+
             cursor: pointer;
+            background: #fff;
+            flex-shrink: 0;           /* 🔥 KHÔNG BỊ ÉP NHỎ */
         }
 
         .tag.active {
@@ -1547,6 +1600,8 @@
             font-weight: 700;
         }
 
+
+        /*///////////////////////////////////////////////////////*/
         /* ITEM ĐÁNH GIÁ */
         .review-item {
             padding: 16px 0;
@@ -1586,7 +1641,7 @@
         }
 
         .review-stars {
-            font-size: 30px; /* ⭐ TO HƠN */
+            font-size: 28px; /* ⭐ TO HƠN */
             color: #ffb400;
             line-height: 1;
         }
@@ -1751,11 +1806,13 @@
             max-width: 520px; /* 👈 kéo dài khối chữ */
             line-height: 1.8; /* 👈 chữ thoáng */
             font-size: 15px; /* 👈 to hơn chút */
+            white-space: pre-line;
         }
 
         .footer-item span,
         .footer-link span {
             flex: 1; /* 👈 chữ chiếm hết chiều ngang */
+            white-space: pre-line;
         }
 
         .footer-link:hover {
@@ -1929,10 +1986,40 @@
 
 
         .detail-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 12px;
+            margin: 10px auto 12px;
+            font-size: 24px;
+            font-weight: 750;
+            display: table;
             color: #222;
+            text-align: center;
+            position: relative;
+            padding: 6px 18px;
+        }
+
+        .detail-title::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 999px;
+            box-shadow:
+                    0 0 6px rgba(255, 122, 69, 0.6),
+                    0 0 12px rgba(255, 122, 69, 0.4),
+                    0 0 20px rgba(255, 122, 69, 0.25);
+            pointer-events: none;
+        }
+        .form-image {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* căn giữa ngang */
+            margin: 16px 0;
+        }
+
+        .form-image img {
+            width: 100%;        /* full theo container */
+            max-width: 600px;   /* giới hạn như form */
+            height: auto;       /* không méo ảnh */
+            display: block;
+            border-radius: 12px; /* bo góc cho đẹp */
         }
 
 
@@ -1971,7 +2058,7 @@
 
 <div id="priceBox" class="price-box">
     <div class="price-left">
-        <div class="labelFirst">Giá Chỉ:</div>
+        <div class="labelFirst">Giá cũ:</div>
         <div id="oldPrice" class="old-price"></div>
     </div>
 
@@ -2006,16 +2093,10 @@
     <div class="info-box">
 
         <div class="line1">
-            <div class="left">
-                <span class="badge-like">Yêu thích</span>
-            </div>
-
-            <div class="center">
-                <span class="warranty-text">BẢO HÀNH 12 THÁNG</span>
-            </div>
-
-            <div class="right"></div> <!-- để cân bằng 2 bên -->
+            <span class="badge-like">Yêu thích</span>
+            <span class="warranty-text"> BẢO HÀNH 12 THÁNG</span>
         </div>
+
 
 
         <div class="line2">
@@ -2062,7 +2143,7 @@
             <div class="benefit-col">
                 <div class="benefit-item">
                     <span class="benefit-icon">🛡️</span>
-                    <span class="benefit-text">Kiểm hàng trước<br>khi thanh toán</span>
+                    <span class="benefit-text">Kiểm hàng trước khi thanh toán</span>
                 </div>
             </div>
 
@@ -2111,7 +2192,7 @@
     </div>
 
 
-<!--    <div id="detailSection" class="detail-section"></div>-->
+
 
     <div id="detailSection" class="detail-section">
         <h1 class="detail-title">Giới thiệu sản phẩm</h1>
@@ -2138,6 +2219,7 @@
                 Cảm ơn quý khách hàng đã đồng hành cùng<br>
                 shop chúng tôi suốt 5 năm qua
             </div>
+
         </div>
 
         <!-- PHẦN 2: THÔNG TIN COMBO -->
@@ -2262,7 +2344,10 @@
 
     </div>
 
-    <img src="/images/fooderformpage.jpg" style="max-width: 600px;">
+    <div class="form-image">
+        <img src="/images/fooderformpage.jpg" alt="footer form">
+    </div>
+
 
 
     <div class="review-wrapper">
@@ -2280,11 +2365,10 @@
                     </div>
                 </div>
                 <div class="summary-tags">
-                    <span class="tag active">Tất cả</span>
-                    <span class="tag">5 sao (1580)</span>
+                    <span class="tag active">5 sao (1580)</span>
                     <span class="tag">4 sao (402)</span>
-                    <span class="tag">3 sao (0)</span>
                 </div>
+
             </div>
 
             <!-- DANH SÁCH ĐÁNH GIÁ -->
@@ -2415,7 +2499,7 @@
             //
             {
                 type: "text",
-                content: "Gối Công Thái Học Massage là sản phẩm hỗ trợ chăm sóc giấc ngủ và thư giãn cổ vai gáy, phù hợp cho người thường xuyên đau mỏi, ngủ không sâu giấc."
+                content: "   Gối Công Thái Học Massage là sản phẩm hỗ trợ chăm sóc giấc ngủ và thư giãn cổ vai gáy, phù hợp cho người thường xuyên đau mỏi, ngủ không sâu giấc."
             },
             {
                 type: "image",
@@ -2424,7 +2508,7 @@
             //
             {
                 type: "text",
-                content: "Cotton cao cấp với cấu trúc sợi đàn hồi, giúp tăng độ đàn hồi, giữ được nhiều không khí bên trong, tạo cảm giác êm ái khi sử dụng và giúp gối luôn giữ form, hạn chế xẹp lún khi nằm lâu."
+                content: "   Cotton cao cấp với cấu trúc sợi đàn hồi, giúp tăng độ đàn hồi, giữ được nhiều không khí bên trong, tạo cảm giác êm ái khi sử dụng và giúp gối luôn giữ form, hạn chế xẹp lún khi nằm lâu."
             },
             {
                 type: "image",
@@ -2437,7 +2521,7 @@
             //
             {
                 type: "text",
-                content: "Thiết kế công thái học 3D phân vùng rõ ràng.\n" +
+                content: "   Thiết kế công thái học 3D phân vùng rõ ràng.\n" +
                     "👉 Vùng thấp (giữa gối): phù hợp tư thế nằm ngửa, giúp giữ cổ thẳng và thoải mái.\n" +
                     "👉 Vùng cao (hai bên): phù hợp tư thế nằm nghiêng, ôm sát cổ như cánh bướm, nâng đỡ tốt khi xoay trở.\n" +
                     "Nhờ phân vùng rõ ràng, gối giúp nâng đỡ đúng tư thế và mang lại cảm giác ngủ thoải mái hơn."
@@ -2449,7 +2533,7 @@
             //
             {
                 type: "text",
-                content: "Vỏ gối dệt kim cao cấp với bề mặt mịn đẹp, đường dệt chắc chắn, vừa tăng tính thẩm mỹ vừa mang lại cảm giác mềm mại, thoáng khí và thoải mái khi tiếp xúc với da."
+                content: "   Vỏ gối dệt kim cao cấp với bề mặt mịn đẹp, đường dệt chắc chắn, vừa tăng tính thẩm mỹ vừa mang lại cảm giác mềm mại, thoáng khí và thoải mái khi tiếp xúc với da."
             },
             {
                 type: "image",
@@ -2458,7 +2542,7 @@
             //
             {
                 type: "text",
-                content: "Bề mặt gối được xử lý kháng khuẩn, giúp loại bỏ nấm mốc và vi khuẩn tích tụ trong quá trình sử dụng, bảo vệ làn da."
+                content: "   Bề mặt gối được xử lý kháng khuẩn, giúp loại bỏ nấm mốc và vi khuẩn tích tụ trong quá trình sử dụng, bảo vệ làn da."
             },
             {
                 type: "image",
@@ -2466,7 +2550,7 @@
             },
             {
                 type: "text",
-                content: "Nhờ bề mặt kháng khuẩn kết hợp chất liệu thoáng khí, gối giúp người dùng ngủ thoải mái hơn, hạn chế bí nóng và cảm giác khó chịu khi nằm lâu."
+                content: "   Nhờ bề mặt kháng khuẩn kết hợp chất liệu thoáng khí, gối giúp người dùng ngủ thoải mái hơn, hạn chế bí nóng và cảm giác khó chịu khi nằm lâu."
             },
             {
                 type: "image",
@@ -2476,7 +2560,7 @@
             // tổ hợp thông tin
             {
                 type: "text",
-                content: "Tổng hợp ưu điểm vượt trội: đàn hồi cao, êm ái, thoáng khí và an toàn hơn hẳn gối thường, cho giấc ngủ thoải mái và bền lâu."
+                content: "   Tổng hợp ưu điểm vượt trội: đàn hồi cao, êm ái, thoáng khí và an toàn hơn hẳn gối thường, cho giấc ngủ thoải mái và bền lâu."
             },
             {
                 type: "image",
@@ -2485,7 +2569,7 @@
             //chứng nhận
             {
                 type: "text",
-                content: "📌 Thông số kỹ thuật và hướng dẫn bảo quản, sử dụng gối."
+                content: "  📌 Thông số kỹ thuật và hướng dẫn bảo quản, sử dụng gối."
             },
             {
                 type: "image",
@@ -2574,7 +2658,8 @@
     };
     // THÔNG TIN FOOTER
     const muc_7 = {
-        address: "Toà D Kim Văn Kim Lũ, Đại Kim, Hoàng Mai, Hà Nội",
+        address: "Toà D Kim Văn Kim Lũ, Đại Kim, \n" +
+            " Hoàng Mai, Hà Nội",
         phone: "0966031758",
         email: "vietducgiadungviet@gmail.com",
     };
